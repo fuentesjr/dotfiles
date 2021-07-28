@@ -1,6 +1,6 @@
 [user]
   name = Salvador Fuentes Jr.
-  email = fuentesjr@gmail.com
+  email = fuentesjr@github.com
 
 [alias]
   st = status
@@ -8,6 +8,7 @@
   br = branch
   co = checkout
   df = diff
+  dfc = diff --cached
   lg = log -p
   last = log -n 1
   graph = log --graph
@@ -32,4 +33,3 @@
   tool = vimdiff
   conflictstyle = diff3
 [core]
-  excludesfile = /Users/fuentesjr/.gitignore_global
