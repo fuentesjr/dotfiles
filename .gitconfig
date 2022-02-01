@@ -22,7 +22,7 @@
 
 [color "branch"]
   current = yellow reverse
-  local = yellow 
+  local = yellow
   remote = green
 
 [color "status"]
@@ -32,4 +32,9 @@
 [merge]
   tool = vimdiff
   conflictstyle = diff3
-[core]
+[github]
+	user = fuentesjr
+[push]
+	default = simple
+[init]
+	defaultBranch = trunk
