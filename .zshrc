@@ -72,11 +72,17 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git rails tmux)
+plugins=(git rails tmux macos)
 
 source $ZSH/oh-my-zsh.sh
+test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 
 # User configuration
+
+export GPG_TTY=$(tty) ## So that are git commits get auto signed
+eval "$(rbenv init -)"
+
+#export PATH="/Users/fuentesjr/bin:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -99,5 +105,20 @@ source $ZSH/oh-my-zsh.sh
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias zshconfig="vim ~/.zshrc"
+alias zshrc="vim ~/.zshrc"
+alias vimrc="vim ~/.vimrc"
+alias tmuxconf="vim ~/.tmux.conf"
 alias ohmyzsh="vim ~/.oh-my-zsh"
+alias be="bundle exec"
+alias vimf="vim \$(fzf)"
+alias nproc="sysctl -n hw.logicalcpu"
+
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='--height 70% --border'
+fi
+DISABLE_SPRING=true
+
+#source /Users/fuentesjr/.config/broot/launcher/bash/br
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
