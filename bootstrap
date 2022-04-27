@@ -10,7 +10,9 @@ rm $HOME/.gitconfig
 sudo apt-get update -y
 
 # Install some developer tools and setup Linux how I like it
-sudo apt-get -y install stow fish
+sudo apt-get -y install stow fish rustc
+
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 
 # Install neovim
 echo 'Installing neovim...'
