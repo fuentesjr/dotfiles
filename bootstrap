@@ -5,8 +5,10 @@ exec > >(tee -i $HOME/dotfiles_install.log)
 exec 2>&1
 set -x
 
+sudo apt-get update -y
+
 # Install some developer tools and setup Linux how I like it
-sudo apt-get install -y stow fish
+sudo apt-get -y install stow fish
 
 # Install neovim
 echo 'Installing neovim...'
