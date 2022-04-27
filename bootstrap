@@ -5,16 +5,7 @@ exec > >(tee -i $HOME/dotfiles_install.log)
 exec 2>&1
 set -x
 
-# Some workarounds until https://github.com/github/codespaces/issues/6527 is resolved
-# When setting up a codespace, we might run into an apt race condition
-# We need to make sure a different process doesn't have a lock before proceeding
-# When it does, the error will be one of 2:
-#   Could not get lock /var/lib/apt/lists/lock
-#   Could not get lock /var/lib/dpkg/lock-frontend
-while apt-get -y update 2>&1 | grep -q "Could not get lock" ; do
-  echo "Waiting for other apt-get instances to exit"
-  sleep 1
-done
+rm $HOME/.gitconfig
 
 sudo apt-get update -y
 
@@ -32,4 +23,4 @@ bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/
 
 # Stow dotfiles
 echo 'Stowing dotfiles...'
-stow --target=$HOME */
+stow --target=$HOME git fish lvim tmux vim
