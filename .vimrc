@@ -49,7 +49,7 @@ Plug 'RyanMillerC/better-vim-tmux-resizer'
 call plug#end()
 
 " https://github.com/rhysd/ghpr-blame.vim
-let g:ghpr_github_auth_token='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'
+let g:ghpr_github_auth_token=''
 
 
 " Airline settings
