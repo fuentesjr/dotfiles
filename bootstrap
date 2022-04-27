@@ -1,0 +1,26 @@
+#!/bin/sh
+# Run by codespaces after starting
+
+exec > >(tee -i $HOME/dotfiles_install.log)
+exec 2>&1
+set -x
+
+apt-get update -y
+# Install some developer tools and setup Linux how I like it
+apt-get install -y stow fish zsh
+
+# Setup the database for locate
+updatedb
+
+# Install neovim
+echo 'Installing neovim...'
+bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
+
+# Install lunarvim
+echo 'Installing stable lunarvim...'
+bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+
+
+# Stow dotfiles
+echo 'Stowing dotfiles...'
+stow --target=$HOME *
