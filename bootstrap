@@ -7,7 +7,8 @@ set -x
 
 sudo apt-get update -y
 # Install some developer tools and setup Linux how I like it
-sudo apt-get install -y stow fish zsh
+sudo apt-get install -y stow fish
+sudo apt-get install -y fish
 
 # Install neovim
 echo 'Installing neovim...'
