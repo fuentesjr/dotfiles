@@ -9,6 +9,7 @@ pager:
 # Aliases allow you to create nicknames for gh commands
 aliases:
     co: pr checkout
-    dev: !gh cs create --status --repo $1
+    dev: !gh cs create --repo $1
+    wait: !gh cs ssh -- tail -f codespaces-post-start.log
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
