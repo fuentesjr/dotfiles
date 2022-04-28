@@ -5,7 +5,9 @@ end
 # Set GPG TTY so that git commits get auto signed
 set -x GPG_TTY (tty)
 
-alias vfish="vim ~/.config/fish/config.fish"
+set -x PATH $HOME/.local/bin $PATH
+
+alias vfish="vim $HOME/.config/fish/config.fish"
 alias be="bundle exec"
-alias vimrc="vim ~/.vimrc"
-alias tmuxconf="vim ~/.tmux.conf"
+alias vimrc="vim $HOME/.vimrc"
+alias tmuxconf="vim $HOME/.tmux.conf"
