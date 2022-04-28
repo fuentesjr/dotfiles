@@ -18,6 +18,8 @@ sudo apt-get -y install stow fish rustc
 echo 'Installing neovim...'
 bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
 
+export PATH=$HOME/.local/bin:$PATH
+
 # Install lunarvim
 echo 'Installing stable lunarvim...'
 no | bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
@@ -26,4 +28,4 @@ no | bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/u
 echo 'Stowing dotfiles...'
 stow --target=$HOME git fish lvim tmux vim
 
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+#curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
