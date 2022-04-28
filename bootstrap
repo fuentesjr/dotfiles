@@ -5,14 +5,14 @@ exec > >(tee -i $HOME/dotfiles_install.log)
 exec 2>&1
 set -x
 
-rm $HOME/.gitconfig
+mv $HOME/.gitconfig $HOME/.gitconfig.stock
+mv $HOME/.zshrc $HOME/.zshrc.stock
 
 sudo apt-get update -y
 
 # Install some developer tools and setup Linux how I like it
 sudo apt-get -y install stow fish rustc
 
-curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 
 # Install neovim
 echo 'Installing neovim...'
@@ -20,9 +20,10 @@ bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils
 
 # Install lunarvim
 echo 'Installing stable lunarvim...'
-bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-
+no | bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
 
 # Stow dotfiles
 echo 'Stowing dotfiles...'
 stow --target=$HOME git fish lvim tmux vim
+
+curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish

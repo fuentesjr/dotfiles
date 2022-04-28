@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/fuentesjr/.oh-my-zsh"
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -82,7 +82,7 @@ test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 export GPG_TTY=$(tty) ## So that are git commits get auto signed
 eval "$(rbenv init -)"
 
-export PATH="/Users/fuentesjr/bin:$PATH"
+export PATH="~/.local/bin/lvim:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -118,7 +118,5 @@ if type rg &> /dev/null; then
   export FZF_DEFAULT_OPTS='--height 70% --border'
 fi
 DISABLE_SPRING=true
-
-source /Users/fuentesjr/.config/broot/launcher/bash/br
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
