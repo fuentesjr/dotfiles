@@ -82,7 +82,7 @@ test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
 export GPG_TTY=$(tty) ## So that are git commits get auto signed
 eval "$(rbenv init -)"
 
-export PATH="~/.local/bin/lvim:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
