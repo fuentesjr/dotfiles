@@ -26,7 +26,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/tpope/vim-rhubarb'
 " Plug 'https://github.com/rhysd/ghpr-blame.vim'
-Plug 'arcticicestudio/nord-vim'
+"
+#Plug 'arcticicestudio/nord-vim'
+Plug 'ghifarit53/tokyonight-vim'
+
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 Plug 'preservim/vimux'
@@ -104,6 +107,8 @@ nnoremap <silent> <Esc>j :TmuxResizeDown<CR>
 nnoremap <silent> <Esc>k :TmuxResizeUp<CR>
 nnoremap <silent> <Esc>l :TmuxResizeRight<CR>
 
-colorscheme nord
+set termguicolors
+colorscheme tokyonight
+#colorscheme nord
 " colorscheme koehler
 " colorscheme blue
