@@ -27,7 +27,7 @@ Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/tpope/vim-rhubarb'
 " Plug 'https://github.com/rhysd/ghpr-blame.vim'
 "
-#Plug 'arcticicestudio/nord-vim'
+"" Plug 'arcticicestudio/nord-vim'
 Plug 'ghifarit53/tokyonight-vim'
 
 Plug 'tpope/vim-rails'
@@ -50,6 +50,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'RyanMillerC/better-vim-tmux-resizer'
 
 call plug#end()
+
+" change the leader key from "\" to ";" ("," is also popular)
+nnoremap <SPACE> <Nop>
+let mapleader=" "
 
 " https://github.com/rhysd/ghpr-blame.vim
 let g:ghpr_github_auth_token=''
@@ -109,6 +113,6 @@ nnoremap <silent> <Esc>l :TmuxResizeRight<CR>
 
 set termguicolors
 colorscheme tokyonight
-#colorscheme nord
+" colorscheme nord
 " colorscheme koehler
 " colorscheme blue
