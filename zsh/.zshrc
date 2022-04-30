@@ -105,6 +105,7 @@ export PATH="$HOME/.local/bin:$PATH"
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
+alias ll="ls -al"
 alias zshrc="vim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
 alias tmuxconf="vim ~/.tmux.conf"
