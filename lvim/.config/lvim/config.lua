@@ -65,17 +65,13 @@ lvim.builtin.nvimtree.show_icons.git = 0
 -- if you don't want all the parsers change this to a table of the ones you want
 lvim.builtin.treesitter.ensure_installed = {
   "bash",
-  --  "c",
   "javascript",
   "json",
   "lua",
   "ruby",
-  --  "python",
   "typescript",
-  --  "tsx",
   "css",
   "rust",
-  --  "java",
   "yaml",
 }
 
@@ -83,7 +79,7 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
---vim.lsp.buf.formatting_sync(nil, 5000)
+vim.lsp.buf.formatting_sync(nil, 5000)
 
 
 -- ---@usage disable automatic installation of servers
@@ -152,8 +148,19 @@ lvim.lsp.automatic_servers_installation = false
 --   },
 -- })
 
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { command = "rubocop" },
+}
+
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { command = "rubocop" },
+}
+
 -- Additional Plugins
 lvim.plugins = {
+  { "ggandor/lightspeed.nvim" },
   { "folke/tokyonight.nvim" },
   {
     "folke/trouble.nvim",
