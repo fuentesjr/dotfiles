@@ -17,7 +17,8 @@ set shiftwidth=2
 set softtabstop=2
 syntax on
 
-" set pastetoggle=<C-i>
+set pastetoggle=<C-l>
+
 
 " Remove trailing spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -26,22 +27,30 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/tpope/vim-rhubarb'
 " Plug 'https://github.com/rhysd/ghpr-blame.vim'
-"
-"" Plug 'arcticicestudio/nord-vim'
+
+""" Themes
+" Plug 'arcticicestudio/nord-vim'
 Plug 'ghifarit53/tokyonight-vim'
 
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
 Plug 'preservim/vimux'
 
+""" Statusline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+""" LSP
+Plug 'ryanoasis/vim-devicons'
+Plug 'neovim/nvim-lspconfig'
+
+""" Git
 Plug 'airblade/vim-gitgutter'
 
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
+""" Find files
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -57,7 +66,6 @@ let mapleader=" "
 
 " https://github.com/rhysd/ghpr-blame.vim
 let g:ghpr_github_auth_token=''
-
 
 " Airline settings
 let g:airline_powerline_fonts=1
