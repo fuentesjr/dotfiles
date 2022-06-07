@@ -189,10 +189,13 @@ lvim.plugins = {
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
-
-lvim.autocommands.custom_groups = {
-  { "FileType", "ruby,lua", "autocmd BufWritePre <buffer> %s/\\s\\+$//e" },
+-- Updated in: https://github.com/LunarVim/lunarvim.org/pull/197
+lvim.autocommands = {
+  {
+    "FileType",
+    {
+      pattern = { "ruby,lua" },
+      command = "autocmd BufWritePre <buffer> %s/\\s\\+$//e",
+    }
+  },
 }
