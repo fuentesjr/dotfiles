@@ -17,7 +17,8 @@ set shiftwidth=2
 set softtabstop=2
 syntax on
 
-" set pastetoggle=<C-i>
+set pastetoggle=<C-l>
+
 
 " Remove trailing spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -26,6 +27,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/tpope/vim-rhubarb'
 " Plug 'https://github.com/rhysd/ghpr-blame.vim'
+"
+""" Themes
+" Plug 'arcticicestudio/nord-vim'
 Plug 'ghifarit53/tokyonight-vim'
 
 Plug 'tpope/vim-rails'
@@ -33,23 +37,34 @@ Plug 'tpope/vim-commentary'
 Plug 'vim-ruby/vim-ruby'
 Plug 'preservim/vimux'
 
+""" Statusline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+""" LSP
+Plug 'ryanoasis/vim-devicons'
+Plug 'neovim/nvim-lspconfig'
+
+""" Git
 Plug 'airblade/vim-gitgutter'
 
 " Tree directory navigator
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-" Motion plugin (moving around in the visible editor area) https://github.com/ggandor/leap.nvim
-Plug 'ggandor/leap.nvim'
+""" Motion plugin (moving around in the visible editor area)
+Plug 'ggandor/leap.nvim' " https://github.com/ggandor/leap.nvim
 
 
+""" Search/Finding
 " Telescope finder
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 " or                                , { 'branch': '0.1.x' }
+
+" Plugin outside ~/.vim/plugged with post-update hook
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+"Plug 'junegunn/fzf.vim'
 
 " Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'RyanMillerC/better-vim-tmux-resizer'
@@ -62,7 +77,6 @@ let mapleader=" "
 
 " https://github.com/rhysd/ghpr-blame.vim
 let g:ghpr_github_auth_token=''
-
 
 " Airline settings
 let g:airline_powerline_fonts=1
@@ -135,5 +149,3 @@ nnoremap <silent> <Esc>l :TmuxResizeRight<CR>
 set termguicolors
 colorscheme tokyonight
 " colorscheme nord
-" colorscheme koehler
-" colorscheme blue

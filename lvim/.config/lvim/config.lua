@@ -8,6 +8,9 @@ an executable
 ]]
 -- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
+-- general vim
+vim.opt.colorcolumn = "120"
+
 -- general
 lvim.log.level = "warn"
 lvim.format_on_save = true
@@ -57,6 +60,18 @@ lvim.builtin.which_key.mappings["t"] = {
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
 lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
+
+-- lvim.builtin.lualine.style = "default"
+-- no need to set style = "lvim"
+local components = require("lvim.core.lualine.components")
+
+lvim.builtin.lualine.sections.lualine_a = { "mode" }
+lvim.builtin.lualine.sections.lualine_y = {
+  components.diagnostics,
+  components.progress,
+  components.location
+}
+
 lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
 lvim.builtin.nvimtree.setup.view.side = "left"
@@ -79,17 +94,17 @@ lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
-vim.lsp.buf.formatting_sync(nil, 5000)
+vim.lsp.buf.formatting_sync(nil, 15000)
 
 
 -- ---@usage disable automatic installation of servers
-lvim.lsp.automatic_servers_installation = false
+-- lvim.lsp.automatic_servers_installation = false
 
 ---configure a server manually. !!Requires `:LvimCacheReset` to take effect!!
 ---see the full default list `:lua print(vim.inspect(lvim.lsp.automatic_configuration.skipped_servers))`
--- vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "pyright" })
---local opts = {} -- check the lspconfig documentation for a list of all possible options
---require("lvim.lsp.manager").setup("solargraph", opts)
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "ruby" })
+local opts = {} -- check the lspconfig documentation for a list of all possible options
+require("lspconfig")["solargraph"].setup(opts)
 
 ---remove a server from the skipped list, e.g. eslint, or emmet_ls. !!Requires `:LvimCacheReset` to take effect!!
 ---`:LvimInfo` lists which server(s) are skiipped for the current filetype
@@ -148,20 +163,25 @@ lvim.lsp.automatic_servers_installation = false
 --   },
 -- })
 
-local formatters = require "lvim.lsp.null-ls.formatters"
-formatters.setup {
-  { command = "rubocop" },
-}
+-- local formatters = require "lvim.lsp.null-ls.formatters"
+-- formatters.setup {
+--   { command = "rubocop" },
+-- }
 
-local linters = require "lvim.lsp.null-ls.linters"
-linters.setup {
-  { command = "rubocop" },
-}
+-- local linters = require "lvim.lsp.null-ls.linters"
+-- linters.setup {
+--   { name = "rubocop" },
+-- }
 
 -- Additional Plugins
 lvim.plugins = {
   { "ggandor/lightspeed.nvim" },
   { "folke/tokyonight.nvim" },
+  {
+    "nvim-telescope/telescope-fzy-native.nvim",
+    run = "make",
+    event = "BufRead",
+  },
   {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
@@ -169,6 +189,13 @@ lvim.plugins = {
 }
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
--- lvim.autocommands.custom_groups = {
---   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
--- }
+-- Updated in: https://github.com/LunarVim/lunarvim.org/pull/197
+lvim.autocommands = {
+  {
+    "FileType",
+    {
+      pattern = { "ruby,lua" },
+      command = "autocmd BufWritePre <buffer> %s/\\s\\+$//e",
+    }
+  },
+}
