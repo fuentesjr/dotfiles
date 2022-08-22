@@ -26,11 +26,10 @@ call plug#begin('~/.vim/plugged')
 Plug 'https://github.com/tpope/vim-fugitive'
 Plug 'https://github.com/tpope/vim-rhubarb'
 " Plug 'https://github.com/rhysd/ghpr-blame.vim'
-"
-"" Plug 'arcticicestudio/nord-vim'
 Plug 'ghifarit53/tokyonight-vim'
 
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-commentary'
 Plug 'vim-ruby/vim-ruby'
 Plug 'preservim/vimux'
 
@@ -39,19 +38,25 @@ Plug 'vim-airline/vim-airline-themes'
 
 Plug 'airblade/vim-gitgutter'
 
-" On-demand loading
+" Tree directory navigator
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-" Plugin outside ~/.vim/plugged with post-update hook
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Motion plugin (moving around in the visible editor area) https://github.com/ggandor/leap.nvim
+Plug 'ggandor/leap.nvim'
+
+
+" Telescope finder
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+" or                                , { 'branch': '0.1.x' }
 
 " Plug 'https://github.com/christoomey/vim-tmux-navigator'
 Plug 'RyanMillerC/better-vim-tmux-resizer'
 
 call plug#end()
 
-" change the leader key from "\" to ";" ("," is also popular)
+" change the leader key from "\" to " " ("," is also popular)
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
@@ -68,20 +73,36 @@ let g:airline#extensions#tabline#enabled = 1
 " Run Ruby code
 autocmd BufRead, *.rb nmap <Leader>r :silent !{ruby %}<cr>
 
+" Reload config after we save changes to it
+autocmd BufWritePost .vimrc source $MYVIMRC
+
 
 " Fzf
-nnoremap <C-p> :Files<CR>
-nnoremap <Leader>f :Rg<CR>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>/ :BLines<CR>
-nnoremap <Leader>' :Marks<CR>
-nnoremap <Leader>g :Commits<CR>
-nnoremap <Leader>H :Helptags<CR>
-nnoremap <Leader>hh :History<CR>
-nnoremap <Leader>h: :History:<CR>
-nnoremap <Leader>h/ :History/<CR>
-let g:fzf_layout = { 'down':  '40%'}
+" nnoremap <C-p> :Files<CR>
+" nnoremap <Leader>f :Rg<CR>
+" nnoremap <Leader>b :Buffers<CR>
+" nnoremap <Leader>/ :BLines<CR>
+" nnoremap <Leader>' :Marks<CR>
+" nnoremap <Leader>g :Commits<CR>
+" nnoremap <Leader>H :Helptags<CR>
+" nnoremap <Leader>hh :History<CR>
+" nnoremap <Leader>h: :History:<CR>
+" nnoremap <Leader>h/ :History/<CR>
+" let g:fzf_layout = { 'down':  '40%'}
 " Buffers for the win
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+nnoremap <leader>km <cmd>Telescope keymaps<cr>
+nnoremap <leader>bb <cmd>Telescope builtin<cr>
+
+" vim config shortcuts
+map <leader>vm :vsp ~/.vimrc<CR>
+map <leader>sv :source $MYVIMRC<CR>
+
 map = :bn<cr>
 map - :bp<cr>
 
