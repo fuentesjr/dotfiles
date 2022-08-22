@@ -31,6 +31,6 @@ rm $HOME/.local/share/lunarvim/lvim/lua/lvim/core/alpha/dashboard.lua
 
 # Stow dotfiles
 echo 'Stowing dotfiles...'
-stow --target=$HOME git fish lvim tmux vim
+stow --target=$HOME git fish tmux vim nvim
 
 #curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
