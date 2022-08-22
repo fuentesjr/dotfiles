@@ -10,9 +10,7 @@ mv $HOME/.zshrc $HOME/.zshrc.stock
 
 sudo apt-get update -y
 
-sudo apt-get -y install stow fish rustc exa htop
-
-brew install lazygit fzf
+sudo apt-get -y install stow fish rustc exa htop fzf
 
 # Install neovim
 echo 'Installing neovim...'
