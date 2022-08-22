@@ -40,5 +40,6 @@
 	user = fuentesjr
 [push]
 	default = simple
+	autoSetupRemote = true
 [init]
 	defaultBranch = trunk
