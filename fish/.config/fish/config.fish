@@ -5,7 +5,7 @@ end
 # Set GPG TTY so that git commits get auto signed
 set -x GPG_TTY (tty)
 
-set -x PATH $HOME/.cargo/bin $HOME/.local/bin $PATH
+set -x PATH $HOME/.cargo/bin $PATH
 
 alias vfish="vim $HOME/.config/fish/config.fish"
 alias be="bundle exec"

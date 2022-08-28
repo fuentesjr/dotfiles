@@ -41,12 +41,16 @@ Plug 'preservim/vimux'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
+""" Note taking
+Plug 'mickael-menu/zk-nvim'
+
 """ LSP
 Plug 'ryanoasis/vim-devicons'
 Plug 'neovim/nvim-lspconfig'
 
 """ Git
 Plug 'airblade/vim-gitgutter'
+Plug 'kdheepak/lazygit.nvim'
 
 " Tree directory navigator
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -108,10 +112,13 @@ autocmd BufWritePost .vimrc source $MYVIMRC
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fw <cmd>Telescope grep_string<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>km <cmd>Telescope keymaps<cr>
 nnoremap <leader>bb <cmd>Telescope builtin<cr>
+nnoremap <leader>lg <cmd>LazyGit<cr>
+
 
 " vim config shortcuts
 map <leader>vm :vsp ~/.vimrc<CR>
@@ -119,6 +126,8 @@ map <leader>sv :source $MYVIMRC<CR>
 
 map = :bn<cr>
 map - :bp<cr>
+map <S-q> :bd<cr>
+map <S-c> :clo<cr>
 
 " Prompt for a command to run
 map <Leader>vp :VimuxPromptCommand<CR>
