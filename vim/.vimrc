@@ -47,6 +47,7 @@ Plug 'neovim/nvim-lspconfig'
 
 """ Git
 Plug 'airblade/vim-gitgutter'
+Plug 'kdheepak/lazygit.nvim'
 
 " Tree directory navigator
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -54,6 +55,9 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 """ Motion plugin (moving around in the visible editor area)
 Plug 'ggandor/leap.nvim' " https://github.com/ggandor/leap.nvim
 
+""" Utilities
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'tpope/vim-surround'
 
 """ Search/Finding
 " Telescope finder
@@ -112,6 +116,7 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>km <cmd>Telescope keymaps<cr>
 nnoremap <leader>bb <cmd>Telescope builtin<cr>
+nnoremap <leader>lg <cmd>LazyGit<cr>
 
 " vim config shortcuts
 map <leader>vm :vsp ~/.vimrc<CR>
@@ -119,6 +124,7 @@ map <leader>sv :source $MYVIMRC<CR>
 
 map = :bn<cr>
 map - :bp<cr>
+map <silent> <S-q> :bd<cr>
 
 " Prompt for a command to run
 map <Leader>vp :VimuxPromptCommand<CR>
