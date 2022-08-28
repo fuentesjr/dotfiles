@@ -18,7 +18,7 @@
   graph = log --graph
   dec = log --pretty=oneline --decorate
   sub = submodule
-  tp = "!f() { GITHUB_TOKEN=$PAT git push; }; f"
+  tp = "!f() { GITHUB_TOKEN=$MYPAT git push; }; f"
 
 [color]
   branch = auto
