@@ -44,3 +44,5 @@
 	autoSetupRemote = true
 [init]
 	defaultBranch = trunk
+[core]
+	excludesFile = ~/.gitignore

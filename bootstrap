@@ -12,23 +12,22 @@ sudo apt-get update -y
 
 sudo apt-get -y install stow fish rustc exa htop fzf
 
-# Install neovim
-echo 'Installing neovim...'
-bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/rolling/utils/installer/install-neovim-from-release)
-
-export PATH=$HOME/.local/bin:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
 
 nvim --headless +PlugInstall +qall
 
-# Install lunarvim
-echo 'Installing stable lunarvim...'
-no | bash <(curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+echo "building ctags"
+script/build-ctags > /dev/null 2>&1
 
-rm -rf $HOME/.config/lvim
-rm $HOME/.local/share/lunarvim/lvim/lua/lvim/core/alpha/dashboard.lua
+echo "Installing rdm"
+wget https://github.com/BlakeWilliams/remote-development-manager/releases/latest/download/rdm-linux-amd64
+sudo mv rdm-linux-amd64 /usr/local/bin/rdm
+sudo chmod +x /usr/local/bin/rdm
+gh config set browser "rdm open"
+alias open="rdm open"
+alias xdg-open="rdm open"
 
 # Stow dotfiles
 echo 'Stowing dotfiles...'
-stow --target=$HOME git fish tmux vim nvim
-
-#curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+stow --target=$HOME git tmux vim nvim
