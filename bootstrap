@@ -7,6 +7,7 @@ set -x
 
 mv $HOME/.gitconfig $HOME/.gitconfig.stock
 mv $HOME/.zshrc $HOME/.zshrc.stock
+ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME/dotfiles
 
 sudo apt-get update -y
 sudo apt-get -y install stow fish rustc exa htop fzf zk
