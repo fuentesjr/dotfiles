@@ -9,7 +9,7 @@ mv $HOME/.gitconfig $HOME/.gitconfig.stock
 mv $HOME/.zshrc $HOME/.zshrc.stock
 
 sudo apt-get update -y
-sudo apt-get -y install stow fish rustc exa htop fzf
+sudo apt-get -y install stow fish rustc exa htop fzf zk
 
 brew install neovim lazygit
 nvim --headless +PlugInstall +qall
