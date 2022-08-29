@@ -9,11 +9,9 @@ mv $HOME/.gitconfig $HOME/.gitconfig.stock
 mv $HOME/.zshrc $HOME/.zshrc.stock
 
 sudo apt-get update -y
-
 sudo apt-get -y install stow fish rustc exa htop fzf
 
-export PATH=$HOME/.cargo/bin:$PATH
-
+brew install neovim lazygit
 nvim --headless +PlugInstall +qall
 
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
