@@ -31,10 +31,12 @@ Plug 'https://github.com/tpope/vim-rhubarb'
 " Plug 'arcticicestudio/nord-vim'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
-Plug 'tpope/vim-rails'
-Plug 'tpope/vim-commentary'
+""" Ruby and Rails
 Plug 'vim-ruby/vim-ruby'
-Plug 'preservim/vimux'
+Plug 'tpope/vim-rails'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
+
 
 """ Statusline
 Plug 'vim-airline/vim-airline'
@@ -60,6 +62,8 @@ Plug 'ggandor/leap.nvim' " https://github.com/ggandor/leap.nvim
 """ Utilities
 Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'preservim/vimux'
 
 """ Search/Finding
 " Telescope finder
