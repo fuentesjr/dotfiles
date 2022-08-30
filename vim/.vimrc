@@ -64,6 +64,8 @@ Plug 'jeffkreeftmeijer/vim-numbertoggle'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/vimux'
+" Hardtime helps you break that annoying habit vimmers have of scrolling up and down the page using jjjjj and kkkkk but without compromising the rest of our vim experience.
+Plug 'takac/vim-hardtime'
 
 """ Search/Finding
 " Telescope finder
@@ -93,6 +95,16 @@ let g:airline_powerline_fonts=1
 let g:airline_theme='light'
 let g:airline#extensions#tabline#enabled = 1
 
+" Hardtime settings :/
+nnoremap <leader>ht <cmd>HardTimeToggle<cr>
+let g:hardtime_default_on = 1
+let g:hardtime_timeout = 1000
+let g:hardtime_showmsg = 1
+let g:list_of_normal_keys = ["h", "j", "k", "l", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_visual_keys = ["h", "j", "k", "l", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_insert_keys = ["<UP>", "<DOWN>", "<LEFT>", "<RIGHT>"]
+let g:list_of_disabled_keys = []
+
 
 " Run Ruby code
 autocmd BufRead, *.rb nmap <Leader>r :silent !{ruby %}<cr>
@@ -102,6 +114,7 @@ autocmd BufWritePost .vimrc source $MYVIMRC
 
 " Find files using Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>cb <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fw <cmd>Telescope grep_string<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
@@ -114,8 +127,8 @@ nnoremap <leader>lg <cmd>LazyGit<cr>
 map <leader>vm :vsp ~/.vimrc<cr>
 map <leader>sv :source $MYVIMRC<cr>
 
-map = :bn<cr>
-map - :bp<cr>
+nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
+nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 map <silent> <S-q> :bd<cr>
 map <silent> <S-c> :clo<cr>
 
