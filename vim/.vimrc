@@ -23,13 +23,26 @@ set pastetoggle=<C-l>
 autocmd BufWritePre * :%s/\s\+$//e
 
 call plug#begin('~/.vim/plugged')
+""" Git
+Plug 'airblade/vim-gitgutter'
+Plug 'kdheepak/lazygit.nvim'
 Plug 'https://github.com/tpope/vim-fugitive'
+
+""" GitHub
 Plug 'https://github.com/tpope/vim-rhubarb'
-" Plug 'https://github.com/rhysd/ghpr-blame.vim'
-"
-""" Themes
-" Plug 'arcticicestudio/nord-vim'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'github/copilot.vim'
+
+""" LSP
+Plug 'ryanoasis/vim-devicons'
+Plug 'neovim/nvim-lspconfig'
+
+""" Navigation
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+"Motion plugin (moving around in the visible editor area)
+Plug 'ggandor/leap.nvim' " https://github.com/ggandor/leap.nvim
+
+""" Note taking
+Plug 'mickael-menu/zk-nvim'
 
 """ Ruby and Rails
 Plug 'vim-ruby/vim-ruby'
@@ -37,49 +50,33 @@ Plug 'tpope/vim-rails'
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
 
-
-""" Statusline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-
-""" Note taking
-Plug 'mickael-menu/zk-nvim'
-
-""" LSP
-Plug 'ryanoasis/vim-devicons'
-Plug 'neovim/nvim-lspconfig'
-
-""" Git
-Plug 'airblade/vim-gitgutter'
-Plug 'kdheepak/lazygit.nvim'
-
-" Tree directory navigator
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
-""" Motion plugin (moving around in the visible editor area)
-Plug 'ggandor/leap.nvim' " https://github.com/ggandor/leap.nvim
-
-""" Utilities
-Plug 'jeffkreeftmeijer/vim-numbertoggle'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'preservim/vimux'
-" Hardtime helps you break that annoying habit vimmers have of scrolling up and down the page using jjjjj and kkkkk but without compromising the rest of our vim experience.
-Plug 'takac/vim-hardtime'
-
 """ Search/Finding
-" Telescope finder
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 " or                                , { 'branch': '0.1.x' }
 
-" Plugin outside ~/.vim/plugged with post-update hook
-"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-"Plug 'junegunn/fzf.vim'
+""" Statusline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
-" Plug 'https://github.com/christoomey/vim-tmux-navigator'
+""" Themes
+" Plug 'arcticicestudio/nord-vim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+
+""" Utilities
+Plug 'mfussenegger/nvim-dap'
+Plug 'suketa/nvim-dap-ruby'
+Plug 'jeffkreeftmeijer/vim-numbertoggle'
+Plug 'mhinz/vim-startify'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'preservim/vimux'
+Plug 'mileszs/ack.vim'
+Plug 'psliwka/vim-smoothie'
 Plug 'RyanMillerC/better-vim-tmux-resizer'
+" Hardtime helps you break that annoying habit vimmers have of scrolling up and down the page using jjjjj and kkkkk but without compromising the rest of our vim experience.
+Plug 'takac/vim-hardtime'
 
 call plug#end()
 
@@ -112,7 +109,7 @@ autocmd BufRead, *.rb nmap <Leader>r :silent !{ruby %}<cr>
 " Reload config after we save changes to it
 autocmd BufWritePost .vimrc source $MYVIMRC
 
-" Find files using Telescope command-line sugar.
+" Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>cb <cmd>Telescope current_buffer_fuzzy_find<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
@@ -123,10 +120,11 @@ nnoremap <leader>km <cmd>Telescope keymaps<cr>
 nnoremap <leader>bb <cmd>Telescope builtin<cr>
 nnoremap <leader>lg <cmd>LazyGit<cr>
 
-" vim config shortcuts
+" Config shortcuts
 map <leader>vm :vsp ~/.vimrc<cr>
 map <leader>sv :source $MYVIMRC<cr>
 
+" Use tabs to switch between buffers
 nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 nnoremap  <silent> <s-tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 map <silent> <S-q> :bd<cr>
@@ -140,6 +138,13 @@ map <Leader>vp :VimuxPromptCommand<cr>
 
 map ,, :NERDTree<cr>
 
+
+" vim-startify splash screen setting
+let g:startify_change_to_dir = 0
+let g:startify_custom_header = startify#pad(split(system('figlet -w 100 [ GitHub / GitCoin ]'), '\n'))
+
+:imap <C-k> <ESC>:Copilot panel<cr>
+
 " https://github.com/RyanMillerC/better-vim-tmux-resizer#configuration
 " https://stackoverflow.com/a/8224269
 let g:tmux_resizer_resize_count = 3
@@ -149,6 +154,39 @@ nnoremap <silent> <Esc>h :TmuxResizeLeft<cr>
 nnoremap <silent> <Esc>j :TmuxResizeDown<cr>
 nnoremap <silent> <Esc>k :TmuxResizeUp<cr>
 nnoremap <silent> <Esc>l :TmuxResizeRight<cr>
+
+"""" vim-rhubarb
+" Open current line on GitHub
+nnoremap <Leader>gh :GBrowse!<CR>:GBrowse<CR>
+vnoremap <Leader>gh :GBrowse!<CR>gv:GBrowse<CR>
+
+"{{{ Keybinding for visiting the GitHub page of the plugin defined on the current line
+augroup Vimrc
+    autocmd!
+    autocmd FileType vim nnoremap <silent> gp :call OpenPluginHomepage()<CR>
+augroup END
+
+function! OpenPluginHomepage() abort
+  " Get line under cursor
+  let line = getline(".")
+
+  " Matches for instance Plug 'tpope/surround' -> tpope/surround
+  " Greedy match in order to not capture trailing comments
+  let plugin_name = '\w\+ \([''"]\)\(.\{-}\)\1'
+
+  try
+    let repository = matchlist(line, plugin_name)[2]
+
+    " Open the corresponding GitHub homepage with $BROWSER
+    " You need to set the BROWSER environment variable in order for this to work
+    " For MacOS, you can set the following for opening it in your default
+    " browser: 'export BROWSER=open'
+    silent exec "!$BROWSER https://github.com/".repository
+  catch /.*/
+    echo 'No match for "<user>/<repository>" on this line!'
+  endtry
+endfunction
+"}}}
 
 set termguicolors
 colorscheme tokyonight
