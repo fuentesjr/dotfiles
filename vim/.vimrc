@@ -40,6 +40,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 "Motion plugin (moving around in the visible editor area)
 Plug 'ggandor/leap.nvim' " https://github.com/ggandor/leap.nvim
+Plug 'preservim/tagbar'
 
 """ Note taking
 Plug 'mickael-menu/zk-nvim'
@@ -154,6 +155,9 @@ nnoremap <silent> <Esc>h :TmuxResizeLeft<cr>
 nnoremap <silent> <Esc>j :TmuxResizeDown<cr>
 nnoremap <silent> <Esc>k :TmuxResizeUp<cr>
 nnoremap <silent> <Esc>l :TmuxResizeRight<cr>
+
+""" preservim/tagbar
+map <Leader>tb :TagbarToggle<cr>
 
 """" vim-rhubarb
 " Open current line on GitHub
