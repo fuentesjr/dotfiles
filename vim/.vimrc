@@ -47,6 +47,7 @@ Plug 'mickael-menu/zk-nvim'
 
 """ Ruby and Rails
 Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rails'
 Plug 'kana/vim-textobj-user'
 Plug 'nelstrom/vim-textobj-rubyblock'
@@ -60,6 +61,9 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 """ Statusline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+""" Testing
+Plug 'vim-test/vim-test'
 
 """ Themes
 " Plug 'arcticicestudio/nord-vim'
@@ -156,6 +160,15 @@ nnoremap <silent> <Esc>j :TmuxResizeDown<cr>
 nnoremap <silent> <Esc>k :TmuxResizeUp<cr>
 nnoremap <silent> <Esc>l :TmuxResizeRight<cr>
 
+""" vim-test
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+
+""" Hack for fixing odd command prompt window resize
+nmap <silent> <leader>cc :so $MYVIMRC<cr>:resize<cr>
 """ preservim/tagbar
 map <Leader>tb :TagbarToggle<cr>
 
