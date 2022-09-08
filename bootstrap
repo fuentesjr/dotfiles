@@ -10,7 +10,7 @@ mv $HOME/.zshrc $HOME/.zshrc.stock
 ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME/dotfiles
 
 sudo apt-get update -y
-sudo apt-get -y install stow fish rustc exa htop fzf zk
+sudo apt-get -y install stow fish rustc exa htop fzf figlet
 
 brew install neovim lazygit ack
 nvim --headless +PlugInstall +qall
