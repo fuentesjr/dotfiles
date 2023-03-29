@@ -26,10 +26,10 @@ call plug#begin('~/.vim/plugged')
 """ Git
 Plug 'airblade/vim-gitgutter'
 Plug 'kdheepak/lazygit.nvim'
-Plug 'https://github.com/tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 """ GitHub
-Plug 'https://github.com/tpope/vim-rhubarb'
+Plug 'tpope/vim-rhubarb'
 Plug 'github/copilot.vim'
 
 """ LSP
@@ -50,7 +50,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rails'
 Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'pocke/rbs.vim'
 
 """ Search/Finding
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -64,6 +64,12 @@ Plug 'vim-airline/vim-airline-themes'
 
 """ Testing
 Plug 'vim-test/vim-test'
+
+""" Text Objects!!
+" https://blog.carbonfive.com/vim-text-objects-the-definitive-guide
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'bkad/CamelCaseMotion'
+
 
 """ Themes
 " Plug 'arcticicestudio/nord-vim'
@@ -89,8 +95,7 @@ call plug#end()
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 
-" https://github.com/rhysd/ghpr-blame.vim
-let g:ghpr_github_auth_token=''
+let g:camelcasemotion_key = '<leader>'
 
 " Airline settings
 let g:airline_powerline_fonts=1
