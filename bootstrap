@@ -10,9 +10,11 @@ mv $HOME/.zshrc $HOME/.zshrc.stock
 ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME/dotfiles
 
 sudo apt-get update -y
-sudo apt-get -y install stow fish rustc exa htop fzf figlet
+sudo apt-get -y install stow fish rustc exa htop
+sudo apt-get -y fzf figlet ripgrep fd-find
 
-brew install neovim lazygit ack
+brew install neovim
+brew install lazygit ack
 nvim --headless +PlugInstall +qall
 
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
@@ -23,10 +25,10 @@ echo "Installing rdm"
 wget https://github.com/BlakeWilliams/remote-development-manager/releases/latest/download/rdm-linux-amd64
 sudo mv rdm-linux-amd64 /usr/local/bin/rdm
 sudo chmod +x /usr/local/bin/rdm
-gh config set browser "rdm open"
+#gh config set browser "rdm open"
 alias open="rdm open"
 alias xdg-open="rdm open"
 
 # Stow dotfiles
 echo 'Stowing dotfiles...'
-stow --target=$HOME git tmux vim nvim
+stow --target=$HOME git tmux vim nvim bash
