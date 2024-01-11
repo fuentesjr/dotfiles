@@ -5,16 +5,23 @@ exec > >(tee -i $HOME/dotfiles_install.log)
 exec 2>&1
 set -x
 
+
+sudo apt-get install -y fuse libfuse2
+sudo groupadd fuse
+sudo usermod -aG fuse "$(whoami)"
+wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
+chmod u+x nvim.appimage
+sudo mv nvim.appimage /usr/bin/nvim
+
+
 mv $HOME/.gitconfig $HOME/.gitconfig.stock
 mv $HOME/.zshrc $HOME/.zshrc.stock
-ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME/dotfiles
+ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME
 
 sudo apt-get update -y
-sudo apt-get -y install stow fish rustc exa htop
 sudo apt-get -y install fzf figlet ripgrep fd-find
+sudo apt-get -y install stow fish rustc exa htop
 
-brew install neovim
-brew install lazygit ack
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 nvim --headless +PlugInstall +qall
@@ -23,13 +30,13 @@ brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 echo "building ctags"
 script/build-ctags > /dev/null 2>&1
 
-echo "Installing rdm"
-wget https://github.com/BlakeWilliams/remote-development-manager/releases/latest/download/rdm-linux-amd64
-sudo mv rdm-linux-amd64 /usr/local/bin/rdm
-sudo chmod +x /usr/local/bin/rdm
+#echo "Installing rdm"
+#wget https://github.com/BlakeWilliams/remote-development-manager/releases/latest/download/rdm-linux-amd64
+#sudo mv rdm-linux-amd64 /usr/local/bin/rdm
+#sudo chmod +x /usr/local/bin/rdm
 #gh config set browser "rdm open"
-alias open="rdm open"
-alias xdg-open="rdm open"
+#alias open="rdm open"
+#alias xdg-open="rdm open"
 
 # Stow dotfiles
 echo 'Stowing dotfiles...'
