@@ -6,6 +6,7 @@ exec 2>&1
 set -x
 
 
+sudo apt-get update -y
 sudo apt-get install -y fuse libfuse2
 sudo groupadd fuse
 sudo usermod -aG fuse "$(whoami)"
@@ -19,6 +20,7 @@ mv $HOME/.zshrc $HOME/.zshrc.stock
 ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME
 
 sudo apt-get update -y
+sleep 1
 sudo apt-get -y install fzf figlet ripgrep fd-find
 sudo apt-get -y install stow fish rustc exa htop
 
@@ -30,6 +32,8 @@ brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 echo "building ctags"
 script/build-ctags > /dev/null 2>&1
 
+# gh extension install https://github.com/rneatherway/gh-slack
+
 #echo "Installing rdm"
 #wget https://github.com/BlakeWilliams/remote-development-manager/releases/latest/download/rdm-linux-amd64
 #sudo mv rdm-linux-amd64 /usr/local/bin/rdm
@@ -40,4 +44,4 @@ script/build-ctags > /dev/null 2>&1
 
 # Stow dotfiles
 echo 'Stowing dotfiles...'
-stow --target=$HOME git tmux vim nvim bash
+stow --target=$HOME git tmux vim nvim bash gh
