@@ -1,0 +1,6 @@
+extensions:
+    slack:
+        team: gitcoin
+        channel: gitcoin-subscriptions
+        bot: hubot
+version: "1"
