@@ -35,6 +35,7 @@ Plug 'github/copilot.vim'
 """ LSP
 Plug 'ryanoasis/vim-devicons'
 Plug 'neovim/nvim-lspconfig'
+Plug 'dense-analysis/ale'
 
 """ Navigation
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
@@ -51,6 +52,7 @@ Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-rails'
 Plug 'kana/vim-textobj-user'
 Plug 'pocke/rbs.vim'
+Plug 'folke/trouble.nvim'
 
 """ Search/Finding
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -64,6 +66,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 """ Testing
 Plug 'vim-test/vim-test'
+let test#strategy = "neovim"
 
 """ Text Objects!!
 " https://blog.carbonfive.com/vim-text-objects-the-definitive-guide
@@ -74,6 +77,7 @@ Plug 'bkad/CamelCaseMotion'
 """ Themes
 " Plug 'arcticicestudio/nord-vim'
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'nvim-tree/nvim-web-devicons'
 
 """ Utilities
 Plug 'mfussenegger/nvim-dap'
@@ -102,6 +106,12 @@ let g:airline_powerline_fonts=1
 let g:airline_theme='light'
 let g:airline#extensions#tabline#enabled = 1
 
+" Set this. Airline will handle the rest.
+let g:airline#extensions#ale#enabled = 1
+
+" ALE https://github.com/dense-analysis/ale
+let g:ale_ruby_ruby_executable = 'bin/safe-ruby'
+
 " Hardtime settings :/
 nnoremap <leader>ht <cmd>HardTimeToggle<cr>
 let g:hardtime_default_on = 1
@@ -129,6 +139,14 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 nnoremap <leader>km <cmd>Telescope keymaps<cr>
 nnoremap <leader>bb <cmd>Telescope builtin<cr>
 nnoremap <leader>lg <cmd>LazyGit<cr>
+
+" Trouble
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 
 " Config shortcuts
 map <leader>vm :vsp ~/.vimrc<cr>
