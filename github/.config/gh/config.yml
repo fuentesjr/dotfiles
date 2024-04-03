@@ -16,7 +16,7 @@ aliases:
 http_unix_socket:
 extensions:
     slack:
-        team: gitcoin
+        team: github
         channel: gitcoin-subscriptions
         bot: hubot
 version: "1"
