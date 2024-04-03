@@ -14,4 +14,9 @@ aliases:
     ghgh: '!gh cs code -c "$(gh cs create -R github/github --devcontainer-path .devcontainer/devcontainer.json -b master -m largePremiumLinux)"'
 # The path to a unix socket through which send HTTP connections. If blank, HTTP traffic will be handled by net/http.DefaultTransport.
 http_unix_socket:
+extensions:
+    slack:
+        team: gitcoin
+        channel: gitcoin-subscriptions
+        bot: hubot
 version: "1"
