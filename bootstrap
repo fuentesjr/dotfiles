@@ -23,9 +23,9 @@ ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME
 sudo apt-get update -y
 sleep 1
 sudo apt-get -y install fzf figlet ripgrep fd-find
-sudo apt-get -y install fish rustc exa htop
+sudo apt-get -y install fish rustc htop
 
-brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+# brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 echo "building ctags"
 script/build-ctags > /dev/null 2>&1
 
