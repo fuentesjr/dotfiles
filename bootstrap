@@ -16,7 +16,7 @@ set -x
 # sudo mv nvim.appimage /usr/bin/nvim
 
 
-mv $HOME/.gitconfig $HOME/.gitconfig.stock
+#mv $HOME/.gitconfig $HOME/.gitconfig.stock
 mv $HOME/.zshrc $HOME/.zshrc.stock
 ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME
 
