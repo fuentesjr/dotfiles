@@ -23,7 +23,8 @@ ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME
 sudo apt-get update -y
 sleep 1
 sudo apt-get -y install fzf figlet ripgrep fd-find
-sudo apt-get -y install fish rustc htop
+#sudo apt-get -y install fish rustc htop
+sudo apt-get -y install stow
 
 # brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 echo "building ctags"
@@ -41,9 +42,9 @@ script/build-ctags > /dev/null 2>&1
 
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-nvim --headless +PlugInstall +qall
 
-sudo apt-get -y install stow
+#nvim --headless +PlugInstall +qall
+
 
 # Stow dotfiles
 echo 'Stowing dotfiles...'

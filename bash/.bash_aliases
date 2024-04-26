@@ -6,3 +6,4 @@ alias ta='tmux attach'
 
 alias c='clear'
 alias tnew='tmux new-session -s'
+export EDITOR=nvim
