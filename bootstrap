@@ -17,7 +17,7 @@ set -x
 
 
 #mv $HOME/.gitconfig $HOME/.gitconfig.stock
-mv $HOME/.zshrc $HOME/.zshrc.stock
+#mv $HOME/.zshrc $HOME/.zshrc.stock
 ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME
 
 sudo apt-get update -y
@@ -49,4 +49,4 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 # Stow dotfiles
 echo 'Stowing dotfiles...'
 #stow --target=$HOME git tmux vim nvim bash
-stow --target=$HOME tmux vim nvim bash
+stow --target=$HOME vim nvim bash
