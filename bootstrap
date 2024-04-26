@@ -45,8 +45,6 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 #nvim --headless +PlugInstall +qall
 
-
 # Stow dotfiles
 echo 'Stowing dotfiles...'
-#stow --target=$HOME git tmux vim nvim bash
-stow --target=$HOME vim nvim bash
+stow --target=$HOME git tmux vim nvim bash
