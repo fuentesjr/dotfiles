@@ -76,7 +76,8 @@ Plug 'bkad/CamelCaseMotion'
 
 """ Themes
 " Plug 'arcticicestudio/nord-vim'
-Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+" Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'nvim-tree/nvim-web-devicons'
 
 """ Utilities
@@ -229,5 +230,12 @@ endfunction
 "}}}
 
 set termguicolors
-colorscheme tokyonight
-" colorscheme nord
+try
+  colorscheme dracula
+  " colorscheme tokyonight
+  " colorscheme nord
+catch /^Vim\%((\a\+)\)\=:E185/
+  " Vim(colorscheme):E185: Cannot find color scheme 'dracula'
+  colorscheme default
+  set background=dark
+endtry
