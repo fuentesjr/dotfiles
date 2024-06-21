@@ -40,6 +40,11 @@ script/build-ctags > /dev/null 2>&1
 #alias open="rdm open"
 #alias xdg-open="rdm open"
 
+# Setup zellij
+rustup update
+cargo install --locked zellij
+zellij setup --generate-completion bash >> ~/.bashrc
+
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
