@@ -152,6 +152,7 @@ nnoremap gR <cmd>TroubleToggle lsp_references<cr>
 " Config shortcuts
 map <leader>vm :vsp ~/.vimrc<cr>
 map <leader>sv :source $MYVIMRC<cr>
+map <leader>zl :vsp ~/.config/zellij/config.kdl<cr>
 
 " Use tabs to switch between buffers
 nnoremap  <silent>   <tab>  :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
