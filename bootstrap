@@ -17,6 +17,7 @@ set -x
 
 
 mv $HOME/.gitconfig $HOME/.gitconfig.stock
+cp $HOME/.bashrc $HOME/.bashrc.stock
 #mv $HOME/.zshrc $HOME/.zshrc.stock
 ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME
 
