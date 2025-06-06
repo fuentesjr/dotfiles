@@ -1,10 +1,8 @@
-[url "https://github.com/"]
-        insteadOf = git@github.com:
 [credential]
         helper = cache
 [user]
   name = Salvador Fuentes Jr.
-  email = fuentesjr@github.com
+  email = fuentesjr@gmail.com
 
 [alias]
   st = status
