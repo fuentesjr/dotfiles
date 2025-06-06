@@ -1,0 +1,11 @@
+"$schema" = "https://jj-vcs.github.io/jj/latest/config-schema.json"
+
+[user]
+name = "Salvador Fuentes Jr."
+email = "fuentesjr@gmail.com"
+
+[operation]
+username = "fuentesjr"
+
+[git]
+push-bookmark-prefix = "fuentesjr/push-"
