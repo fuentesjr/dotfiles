@@ -1,9 +1,9 @@
 #!/bin/bash
 # Run by codespaces after starting
 
-exec > >(tee -i $HOME/dotfiles_install.log)
-exec 2>&1
-set -x
+#exec > >(tee -i $HOME/dotfiles_install.log)
+#exec 2>&1
+#set -x
 
 # Install neovim
 # Note, neovim is now being preinstalled in codespaces
@@ -18,16 +18,13 @@ set -x
 
 mv $HOME/.gitconfig $HOME/.gitconfig.stock
 cp $HOME/.bashrc $HOME/.bashrc.stock
-#mv $HOME/.zshrc $HOME/.zshrc.stock
-ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME
+mv $HOME/.zshrc $HOME/.zshrc.stock
+#ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME
 
-sudo apt-get update -y
-sleep 1
-sudo apt-get -y install fzf figlet ripgrep fd-find
-#sudo apt-get -y install fish rustc htop
-sudo apt-get -y install stow
+brew install fzf figlet ripgrep fd-find
+brew install stow
 
-# brew install --HEAD universal-ctags/universal-ctags/universal-ctags
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 echo "building ctags"
 script/build-ctags > /dev/null 2>&1
 
@@ -43,8 +40,8 @@ script/build-ctags > /dev/null 2>&1
 
 # Setup zellij
 rustup update
-cargo install --locked zellij
-zellij setup --generate-completion bash >> ~/.bashrc
+#cargo install --locked zellij
+#zellij setup --generate-completion bash >> ~/.bashrc
 
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'

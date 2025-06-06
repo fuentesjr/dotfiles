@@ -16,13 +16,28 @@ set shiftwidth=2
 set softtabstop=2
 syntax on
 
-set pastetoggle=<C-l>
+" set pastetoggle=<C-l>
 
 
 " Remove trailing spaces on save
 autocmd BufWritePre * :%s/\s\+$//e
 
 call plug#begin('~/.vim/plugged')
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" LSP support
+Plug 'neovim/nvim-lspconfig'
+
+" Optional: Better LSP UI
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+" Optional: Autocompletion
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+
 """ Git
 Plug 'airblade/vim-gitgutter'
 Plug 'kdheepak/lazygit.nvim'
@@ -45,6 +60,11 @@ Plug 'preservim/tagbar'
 
 """ Note taking
 Plug 'mickael-menu/zk-nvim'
+
+""" Golang
+" https://github.com/ray-x/go.nvim
+Plug 'ray-x/go.nvim'
+Plug 'ray-x/guihua.lua' " recommended if need floating window support
 
 """ Ruby and Rails
 Plug 'vim-ruby/vim-ruby'
