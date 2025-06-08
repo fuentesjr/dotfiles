@@ -9,3 +9,6 @@ username = "fuentesjr"
 
 [git]
 push-bookmark-prefix = "fuentesjr/push-"
+
+[ui]
+default-command = "log"
