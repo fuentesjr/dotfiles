@@ -2,3 +2,4 @@
 notes/
 sorbet/
 vendor/
+.DS_Store
