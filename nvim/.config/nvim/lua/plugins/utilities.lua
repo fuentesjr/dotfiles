@@ -1,5 +1,26 @@
 -- Utility plugins
 return {
+
+  -- Helps you remember your Neovim keymaps, by showing available keybindings in a popup as you type.
+  {
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+    keys = {
+      {
+        "<leader>?",
+        function()
+          require("which-key").show({ global = false })
+        end,
+        desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
+  },
+
   -- Text manipulation
   {
     "tpope/vim-surround",
@@ -57,7 +78,7 @@ return {
       vim.g.tmux_resizer_resize_count = 3
       vim.g.tmux_resizer_vertical_resize_count = 3
       vim.g.tmux_resizer_no_mappings = 1
-      
+
       -- Set up keymaps
       vim.keymap.set("n", "<Esc>h", ":TmuxResizeLeft<cr>", { silent = true })
       vim.keymap.set("n", "<Esc>j", ":TmuxResizeDown<cr>", { silent = true })
@@ -99,7 +120,7 @@ return {
       vim.g.list_of_visual_keys = { "h", "j", "k", "l", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" }
       vim.g.list_of_insert_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" }
       vim.g.list_of_disabled_keys = {}
-      
+
       vim.keymap.set("n", "<leader>ht", "<cmd>HardTimeToggle<cr>", { desc = "Toggle hardtime" })
     end,
   },

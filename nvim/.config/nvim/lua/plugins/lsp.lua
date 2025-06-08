@@ -43,7 +43,7 @@ return {
         end, opts)
         
         -- Document highlight
-        if client.server_capabilities.documentHighlightProvider then
+        if client and client.server_capabilities and client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_augroup("lsp_document_highlight", {
             clear = false,
           })

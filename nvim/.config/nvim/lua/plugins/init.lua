@@ -18,4 +18,5 @@ return {
   { import = "plugins.lang" },
   { import = "plugins.navigation" },
   { import = "plugins.utilities" },
+  { import = "plugins.ai" },
 }

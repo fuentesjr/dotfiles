@@ -31,7 +31,7 @@ keymap("n", "<S-c>", ":clo<cr>", opts)
 keymap("n", "<C-v>", ":tabnew ", { noremap = true })
 keymap("i", "<C-v>", "<ESC>:tabnew ", { noremap = true })
 
--- NERDTree/nvim-tree toggle
+-- nvim-tree toggle
 keymap("n", ",,", ":NvimTreeToggle<cr>", opts)
 
 -- Copilot
@@ -72,7 +72,7 @@ keymap("n", "<leader>ht", ":HardTimeToggle<cr>", opts)
 keymap("n", "<leader>vp", ":VimuxPromptCommand<cr>", opts)
 
 -- Telescope keymaps (will be organized in telescope.lua)
-keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+keymap("n", "<leader>sf", "<cmd>Telescope find_files<cr>", opts)
 keymap("n", "<leader>cb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", opts)
 keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", opts)
 keymap("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", opts)

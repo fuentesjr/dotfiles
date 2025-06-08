@@ -12,7 +12,7 @@ return {
     },
     cmd = "Telescope",
     keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+      { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Search files" },
       { "<leader>cb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Current buffer fuzzy find" },
       { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
       { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Grep string" },
