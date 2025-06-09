@@ -77,8 +77,8 @@ return {
         },
         pickers = {
           find_files = {
-            theme = "dropdown",
-            previewer = false,
+            theme = "ivy",
+            previewer = true,
           },
           buffers = {
             theme = "dropdown",

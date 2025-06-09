@@ -6,8 +6,9 @@
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export PATH="$HOME/.local/bin:$PATH"
 export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+export PATH="$HOME/.local/bin:$PATH"
 export EDITOR="nvim"
 export ARCHFLAGS="-arch x86_64"
 if type rg &> /dev/null; then
