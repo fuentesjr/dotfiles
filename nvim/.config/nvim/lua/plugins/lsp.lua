@@ -30,7 +30,7 @@ return {
       -- LSP keymaps function
       local on_attach = function(client, bufnr)
         local opts = { noremap = true, silent = true, buffer = bufnr }
-        
+
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
         vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
@@ -41,7 +41,7 @@ return {
         vim.keymap.set("n", "<leader>f", function()
           vim.lsp.buf.format { async = true }
         end, opts)
-        
+
         -- Document highlight
         if client and client.server_capabilities and client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_augroup("lsp_document_highlight", {

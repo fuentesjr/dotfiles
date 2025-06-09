@@ -13,7 +13,6 @@ return {
       require("go").setup({
         goimports = "gopls",
         gofmt = "gofumpt",
-        max_line_len = 120,
         tag_transform = false,
         test_dir = "",
         comment_placeholder = "   ",
@@ -28,7 +27,7 @@ return {
       vim.api.nvim_create_autocmd("BufWritePre", {
         pattern = "*.go",
         callback = function()
-          require("go.format").gofmt()
+          vim.lsp.buf.format({ async = false })
         end,
         group = format_sync_grp,
       })
