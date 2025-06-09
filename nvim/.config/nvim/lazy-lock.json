@@ -1,5 +1,6 @@
 {
   "CamelCaseMotion": { "branch": "master", "commit": "de439d7c06cffd0839a29045a103fe4b44b15cdc" },
+  "FTerm.nvim": { "branch": "master", "commit": "d1320892cc2ebab472935242d9d992a2c9570180" },
   "LuaSnip": { "branch": "master", "commit": "458560534a73f7f8d7a11a146c801db00b081df0" },
   "ack.vim": { "branch": "master", "commit": "36e40f9ec91bdbf6f1adf408522a73a6925c3042" },
   "ale": { "branch": "master", "commit": "80ff84db84ba172bfcdee5e2748924bb2249134b" },

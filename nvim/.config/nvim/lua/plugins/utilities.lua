@@ -133,4 +133,21 @@ return {
       require("zk").setup()
     end,
   },
+
+  -- Floating terminal
+  {
+    "numToStr/FTerm.nvim",
+    keys = {
+      { "<A-i>", function() require("FTerm").toggle() end, desc = "Toggle terminal", mode = { "n", "t" } },
+    },
+    config = function()
+      require("FTerm").setup({
+        border = "double",
+        dimensions = {
+          height = 0.9,
+          width = 0.9,
+        },
+      })
+    end,
+  },
 }
