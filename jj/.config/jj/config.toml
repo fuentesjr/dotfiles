@@ -12,3 +12,6 @@ push-bookmark-prefix = "fuentesjr/push-"
 
 [ui]
 default-command = "log"
+
+[core]
+excludesfile = "~/.gitignore_global"
