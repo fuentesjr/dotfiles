@@ -53,6 +53,7 @@ keymap("n", "<leader>g", ":TestVisit<CR>", opts)
 -- Config shortcuts
 keymap("n", "<leader>vm", ":vsp ~/.config/nvim/init.lua<cr>", opts)
 keymap("n", "<leader>sv", ":source ~/.config/nvim/init.lua<cr>", opts)
+keymap("n", "<leader>vc", function() require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Search config files" })
 keymap("n", "<leader>zl", ":vsp ~/.config/zellij/config.kdl<cr>", opts)
 
 -- Fix resize issue

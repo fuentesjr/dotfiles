@@ -11,8 +11,16 @@ opt.showmatch = true
 
 -- Indentation
 opt.expandtab = true
-opt.shiftwidth = 2
-opt.softtabstop = 2
+opt.shiftwidth = 4
+opt.softtabstop = 4
+opt.tabstop = 4
+
+-- Auto reload files if they change
+opt.autoread = true
+vim.api.nvim_create_autocmd({"FocusGained", "BufEnter"}, {
+  pattern = "*",
+  command = "checktime"
+})
 
 -- Enable syntax highlighting
 vim.cmd("syntax on")
