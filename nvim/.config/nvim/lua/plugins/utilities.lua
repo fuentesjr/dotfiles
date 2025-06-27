@@ -6,9 +6,64 @@ return {
     "folke/which-key.nvim",
     event = "VeryLazy",
     opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
+      preset = "modern",
+      delay = 400,
+      spec = {
+        -- File/Search operations
+        { "<leader>f", group = "Find" },
+        { "<leader>fg", desc = "Live grep" },
+        { "<leader>fw", desc = "Grep word under cursor" },
+        { "<leader>fb", desc = "Search buffers" },
+        { "<leader>fh", desc = "Help tags" },
+        { "<leader>sf", desc = "Find files" },
+        { "<leader>cb", desc = "Current buffer fuzzy find" },
+        
+        -- Testing
+        { "<leader>t", desc = "Test nearest" },
+        { "<leader>T", desc = "Test file" },
+        { "<leader>a", desc = "Test suite" },
+        { "<leader>l", desc = "Test last" },
+        { "<leader>g", desc = "Test visit" },
+        
+        -- Trouble diagnostics
+        { "<leader>x", group = "Trouble" },
+        { "<leader>xx", desc = "Toggle trouble" },
+        { "<leader>xw", desc = "Workspace diagnostics" },
+        { "<leader>xd", desc = "Document diagnostics" },
+        { "<leader>xq", desc = "Quickfix list" },
+        { "<leader>xl", desc = "Location list" },
+        
+        -- Configuration
+        { "<leader>v", group = "Config" },
+        { "<leader>vm", desc = "Edit nvim config" },
+        { "<leader>sv", desc = "Source nvim config" },
+        { "<leader>vc", desc = "Search config files" },
+        { "<leader>zl", desc = "Edit zellij config" },
+        { "<leader>cc", desc = "Fix resize issue" },
+        
+        -- Git
+        { "<leader>gh", desc = "Browse on GitHub" },
+        { "<leader>lg", desc = "LazyGit" },
+        
+        -- Utilities
+        { "<leader>tb", desc = "Toggle tagbar" },
+        { "<leader>ht", desc = "Toggle hardtime" },
+        { "<leader>km", desc = "Show keymaps" },
+        { "<leader>bb", desc = "Telescope builtin" },
+        
+        -- Vimux
+        { "<leader>vp", desc = "Vimux prompt command" },
+        
+        -- LSP
+        { "<leader>rn", desc = "LSP rename" },
+        { "<leader>ca", desc = "Code actions" },
+        { "<leader>f", desc = "Format buffer" },
+        { "gd", desc = "Go to definition" },
+        { "gi", desc = "Go to implementation" },
+        { "gr", desc = "Go to references" },
+        { "gR", desc = "LSP references (Trouble)" },
+        { "K", desc = "Hover documentation" },
+      },
     },
     keys = {
       {

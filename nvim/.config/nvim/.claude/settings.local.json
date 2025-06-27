@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(gofumpt:*)"
+      "Bash(gofumpt:*)",
+      "Bash(find:*)",
+      "Bash(nvim:*)"
     ],
     "deny": []
   }
