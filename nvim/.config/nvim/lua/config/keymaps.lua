@@ -15,33 +15,33 @@ keymap("n", "<Tab>", function()
     vim.cmd("write")
   end
   vim.cmd("bnext")
-end, opts)
+end, { noremap = true, silent = true, desc = "Next buffer (save if modified)" })
 
 keymap("n", "<S-Tab>", function()
   if vim.bo.modifiable and not vim.bo.readonly and vim.bo.modified then
     vim.cmd("write")
   end
   vim.cmd("bprevious")
-end, opts)
+end, { noremap = true, silent = true, desc = "Previous buffer (save if modified)" })
 
-keymap("n", "<S-q>", ":bd<cr>", opts)
-keymap("n", "<S-c>", ":clo<cr>", opts)
+keymap("n", "<S-q>", ":bd<cr>", { noremap = true, silent = true, desc = "Delete buffer" })
+keymap("n", "<S-c>", ":clo<cr>", { noremap = true, silent = true, desc = "Close window" })
 
 -- Tab navigation
-keymap("n", "<C-v>", ":tabnew ", { noremap = true })
-keymap("i", "<C-v>", "<ESC>:tabnew ", { noremap = true })
+keymap("n", "<C-v>", ":tabnew ", { noremap = true, desc = "New tab" })
+keymap("i", "<C-v>", "<ESC>:tabnew ", { noremap = true, desc = "New tab" })
 
 -- nvim-tree toggle
-keymap("n", ",,", ":NvimTreeToggle<cr>", opts)
+keymap("n", ",,", ":NvimTreeToggle<cr>", { noremap = true, silent = true, desc = "Toggle file tree" })
 
 -- Copilot
-keymap("i", "<C-k>", "<ESC>:Copilot panel<cr>", opts)
+keymap("i", "<C-k>", "<ESC>:Copilot panel<cr>", { noremap = true, silent = true, desc = "Open Copilot panel" })
 
 -- Tmux resizer
-keymap("n", "<Esc>h", ":TmuxResizeLeft<cr>", opts)
-keymap("n", "<Esc>j", ":TmuxResizeDown<cr>", opts)
-keymap("n", "<Esc>k", ":TmuxResizeUp<cr>", opts)
-keymap("n", "<Esc>l", ":TmuxResizeRight<cr>", opts)
+keymap("n", "<Esc>h", ":TmuxResizeLeft<cr>", { noremap = true, silent = true, desc = "Resize left" })
+keymap("n", "<Esc>j", ":TmuxResizeDown<cr>", { noremap = true, silent = true, desc = "Resize down" })
+keymap("n", "<Esc>k", ":TmuxResizeUp<cr>", { noremap = true, silent = true, desc = "Resize up" })
+keymap("n", "<Esc>l", ":TmuxResizeRight<cr>", { noremap = true, silent = true, desc = "Resize right" })
 
 -- Test commands
 keymap("n", "<leader>t", ":TestNearest<CR>", opts)
