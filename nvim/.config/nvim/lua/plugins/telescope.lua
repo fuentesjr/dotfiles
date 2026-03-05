@@ -12,14 +12,14 @@ return {
     },
     cmd = "Telescope",
     keys = {
-      { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Search files" },
-      { "<leader>cb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Current buffer fuzzy find" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live grep" },
-      { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Grep string" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
-      { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
-      { "<leader>km", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
-      { "<leader>bb", "<cmd>Telescope builtin<cr>", desc = "Builtin" },
+      { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      { "<leader>cb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search Current Buffer" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Search Text (Live Grep)" },
+      { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Search Word Under Cursor" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Open Buffers" },
+      { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Find Help Tags" },
+      { "<leader>km", "<cmd>Telescope keymaps<cr>", desc = "Find Keymaps" },
+      { "<leader>bb", "<cmd>Telescope builtin<cr>", desc = "Find Telescope Pickers" },
     },
     config = function()
       local telescope = require("telescope")

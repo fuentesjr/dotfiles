@@ -115,22 +115,24 @@ return {
       })
 
       -- Global LSP settings
+      local diagnostic_signs = {
+        [vim.diagnostic.severity.ERROR] = " ",
+        [vim.diagnostic.severity.WARN] = " ",
+        [vim.diagnostic.severity.INFO] = " ",
+        [vim.diagnostic.severity.HINT] = " ",
+      }
+
       vim.diagnostic.config({
         virtual_text = {
           prefix = "●",
         },
-        signs = true,
+        signs = {
+          text = diagnostic_signs,
+        },
         underline = true,
         update_in_insert = false,
         severity_sort = true,
       })
-
-      -- LSP diagnostic signs
-      local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
     end,
   },
 
@@ -164,6 +166,14 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
     cmd = "Trouble",
+    keys = {
+      { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics: Toggle" },
+      { "<leader>xw", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics: Workspace" },
+      { "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Diagnostics: Buffer" },
+      { "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "Diagnostics: Quickfix List" },
+      { "<leader>xl", "<cmd>Trouble loclist toggle<cr>", desc = "Diagnostics: Location List" },
+      { "gR", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP: References (Trouble)" },
+    },
   },
 
   -- ALE for additional linting

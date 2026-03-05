@@ -5,7 +5,7 @@ return {
     "nvim-tree/nvim-tree.lua",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
-      { ",,", "<cmd>NvimTreeToggle<cr>", desc = "Toggle file tree" },
+      { ",,", "<cmd>NvimTreeToggle<cr>", desc = "Toggle File Tree" },
     },
     config = function()
       require("nvim-tree").setup({
@@ -41,7 +41,7 @@ return {
   {
     "preservim/tagbar",
     keys = {
-      { "<leader>tb", ":TagbarToggle<cr>", desc = "Toggle tagbar" },
+      { "<leader>tb", ":TagbarToggle<cr>", desc = "Toggle Tagbar" },
     },
   },
 

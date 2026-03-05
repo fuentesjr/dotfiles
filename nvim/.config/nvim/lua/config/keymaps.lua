@@ -31,9 +31,6 @@ keymap("n", "<S-c>", ":clo<cr>", { noremap = true, silent = true, desc = "Close 
 keymap("n", "<C-v>", ":tabnew ", { noremap = true, desc = "New tab" })
 keymap("i", "<C-v>", "<ESC>:tabnew ", { noremap = true, desc = "New tab" })
 
--- nvim-tree toggle
-keymap("n", ",,", ":NvimTreeToggle<cr>", { noremap = true, silent = true, desc = "Toggle file tree" })
-
 -- Duplicated keymaps kept for reference (inactive; defined in plugin/LSP configs)
 -- Copilot
 -- keymap("i", "<C-k>", "<ESC>:Copilot panel<cr>", { noremap = true, silent = true, desc = "Open Copilot panel" })
@@ -87,17 +84,3 @@ keymap("n", "<leader>zl", ":vsp ~/.config/zellij/config.kdl<cr>", opts)
 
 -- Fix resize issue
 keymap("n", "<leader>cc", ":so ~/.config/nvim/init.lua<cr>:resize<cr>", opts)
-
--- Tagbar
-keymap("n", "<leader>tb", ":TagbarToggle<cr>", opts)
-
--- Hardtime toggle
-keymap("n", "<leader>ht", ":HardTimeToggle<cr>", opts)
-
--- Trouble
-keymap("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", opts)
-keymap("n", "<leader>xw", "<cmd>Trouble diagnostics toggle<cr>", opts)
-keymap("n", "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", opts)
-keymap("n", "<leader>xq", "<cmd>Trouble qflist toggle<cr>", opts)
-keymap("n", "<leader>xl", "<cmd>Trouble loclist toggle<cr>", opts)
-keymap("n", "gR", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", opts)

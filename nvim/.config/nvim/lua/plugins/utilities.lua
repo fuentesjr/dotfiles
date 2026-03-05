@@ -9,60 +9,59 @@ return {
       preset = "modern",
       delay = 400,
       spec = {
-        -- File/Search operations
-        { "<leader>f", group = "Find" },
-        { "<leader>fg", desc = "Live grep" },
-        { "<leader>fw", desc = "Grep word under cursor" },
-        { "<leader>fb", desc = "Search buffers" },
-        { "<leader>fh", desc = "Help tags" },
-        { "<leader>sf", desc = "Find files" },
-        { "<leader>cb", desc = "Current buffer fuzzy find" },
+        -- Search operations
+        { "<leader>fg", desc = "Search Text (Live Grep)" },
+        { "<leader>fw", desc = "Search Word Under Cursor" },
+        { "<leader>fb", desc = "Find Open Buffers" },
+        { "<leader>fh", desc = "Find Help Tags" },
+        { "<leader>sf", desc = "Find Files" },
+        { "<leader>cb", desc = "Search Current Buffer" },
         
         -- Testing
-        { "<leader>t", desc = "Test nearest" },
-        { "<leader>T", desc = "Test file" },
-        { "<leader>a", desc = "Test suite" },
-        { "<leader>l", desc = "Test last" },
-        { "<leader>g", desc = "Test visit" },
+        { "<leader>t", desc = "Run Nearest Test" },
+        { "<leader>T", desc = "Run Test File" },
+        { "<leader>a", desc = "Run Test Suite" },
+        { "<leader>l", desc = "Run Last Test" },
+        { "<leader>g", desc = "Visit Last Test File" },
         
-        -- Trouble diagnostics
-        { "<leader>x", group = "Trouble" },
-        { "<leader>xx", desc = "Toggle trouble" },
-        { "<leader>xw", desc = "Workspace diagnostics" },
-        { "<leader>xd", desc = "Document diagnostics" },
-        { "<leader>xq", desc = "Quickfix list" },
-        { "<leader>xl", desc = "Location list" },
+        -- Diagnostics (Trouble)
+        { "<leader>x", group = "Diagnostics" },
+        { "<leader>xx", desc = "Diagnostics: Toggle" },
+        { "<leader>xw", desc = "Diagnostics: Workspace" },
+        { "<leader>xd", desc = "Diagnostics: Buffer" },
+        { "<leader>xq", desc = "Diagnostics: Quickfix List" },
+        { "<leader>xl", desc = "Diagnostics: Location List" },
         
         -- Configuration
         { "<leader>v", group = "Config" },
-        { "<leader>vm", desc = "Edit nvim config" },
-        { "<leader>sv", desc = "Source nvim config" },
-        { "<leader>vc", desc = "Search config files" },
-        { "<leader>zl", desc = "Edit zellij config" },
-        { "<leader>cc", desc = "Fix resize issue" },
+        { "<leader>vm", desc = "Open Neovim Config" },
+        { "<leader>sv", desc = "Reload Neovim Config" },
+        { "<leader>vc", desc = "Find Config Files" },
+        { "<leader>zl", desc = "Open Zellij Config" },
+        { "<leader>cc", desc = "Reload Config + Resize" },
         
         -- Git
-        { "<leader>gh", desc = "Browse on GitHub" },
-        { "<leader>lg", desc = "LazyGit" },
+        { "<leader>gh", desc = "Open on GitHub" },
+        { "<leader>lg", desc = "Open LazyGit" },
         
         -- Utilities
-        { "<leader>tb", desc = "Toggle tagbar" },
-        { "<leader>ht", desc = "Toggle hardtime" },
-        { "<leader>km", desc = "Show keymaps" },
-        { "<leader>bb", desc = "Telescope builtin" },
+        { "<leader>tb", desc = "Toggle Tagbar" },
+        { "<leader>ht", desc = "Toggle Hardtime" },
+        { "<leader>km", desc = "Find Keymaps" },
+        { "<leader>bb", desc = "Find Telescope Pickers" },
         
         -- Vimux
-        { "<leader>vp", desc = "Vimux prompt command" },
+        { "<leader>vp", desc = "Vimux: Prompt Command" },
         
         -- LSP
-        { "<leader>rn", desc = "LSP rename" },
-        { "<leader>ca", desc = "Code actions" },
-        { "<leader>f", desc = "Format buffer" },
-        { "gd", desc = "Go to definition" },
-        { "gi", desc = "Go to implementation" },
-        { "gr", desc = "Go to references" },
-        { "gR", desc = "LSP references (Trouble)" },
-        { "K", desc = "Hover documentation" },
+        { "<leader>rn", desc = "LSP: Rename Symbol" },
+        { "<leader>ca", desc = "LSP: Code Action" },
+        { "<leader>f", desc = "LSP: Format Buffer" },
+        { "gd", desc = "LSP: Go to Definition" },
+        { "gi", desc = "LSP: Go to Implementation" },
+        { "gr", desc = "LSP: Go to References" },
+        { "gR", desc = "LSP: References (Trouble)" },
+        { "K", desc = "LSP: Hover Docs" },
       },
     },
     keys = {
@@ -71,7 +70,7 @@ return {
         function()
           require("which-key").show({ global = false })
         end,
-        desc = "Buffer Local Keymaps (which-key)",
+        desc = "Buffer Local Keymaps",
       },
     },
   },
@@ -102,11 +101,11 @@ return {
   {
     "vim-test/vim-test",
     keys = {
-      { "<leader>t", ":TestNearest<CR>", desc = "Test nearest" },
-      { "<leader>T", ":TestFile<CR>", desc = "Test file" },
-      { "<leader>a", ":TestSuite<CR>", desc = "Test suite" },
-      { "<leader>l", ":TestLast<CR>", desc = "Test last" },
-      { "<leader>g", ":TestVisit<CR>", desc = "Test visit" },
+      { "<leader>t", ":TestNearest<CR>", desc = "Run Nearest Test" },
+      { "<leader>T", ":TestFile<CR>", desc = "Run Test File" },
+      { "<leader>a", ":TestSuite<CR>", desc = "Run Test Suite" },
+      { "<leader>l", ":TestLast<CR>", desc = "Run Last Test" },
+      { "<leader>g", ":TestVisit<CR>", desc = "Visit Last Test File" },
     },
     config = function()
       vim.g["test#strategy"] = "neovim"
@@ -117,7 +116,7 @@ return {
   {
     "preservim/vimux",
     keys = {
-      { "<leader>vp", ":VimuxPromptCommand<cr>", desc = "Vimux prompt" },
+      { "<leader>vp", ":VimuxPromptCommand<cr>", desc = "Vimux: Prompt Command" },
     },
   },
 
@@ -152,6 +151,9 @@ return {
   {
     "takac/vim-hardtime",
     event = "VeryLazy",
+    keys = {
+      { "<leader>ht", "<cmd>HardTimeToggle<cr>", desc = "Toggle Hardtime" },
+    },
     config = function()
       vim.g.hardtime_default_on = 1
       vim.g.hardtime_timeout = 1000
@@ -160,8 +162,6 @@ return {
       vim.g.list_of_visual_keys = { "h", "j", "k", "l", "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" }
       vim.g.list_of_insert_keys = { "<UP>", "<DOWN>", "<LEFT>", "<RIGHT>" }
       vim.g.list_of_disabled_keys = {}
-
-      vim.keymap.set("n", "<leader>ht", "<cmd>HardTimeToggle<cr>", { desc = "Toggle hardtime" })
     end,
   },
 
