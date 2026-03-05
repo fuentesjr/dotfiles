@@ -98,12 +98,6 @@ return {
     lazy = true,
   },
 
-  {
-    "nelstrom/vim-textobj-rubyblock",
-    dependencies = { "kana/vim-textobj-user" },
-    ft = "ruby",
-  },
-
   -- Testing
   {
     "vim-test/vim-test",
@@ -152,15 +146,6 @@ return {
   {
     "mfussenegger/nvim-dap",
     lazy = true,
-  },
-
-  {
-    "suketa/nvim-dap-ruby",
-    dependencies = { "mfussenegger/nvim-dap" },
-    ft = "ruby",
-    config = function()
-      require("dap-ruby").setup()
-    end,
   },
 
   -- Hardtime - break bad habits

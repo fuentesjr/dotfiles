@@ -163,7 +163,7 @@ return {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     opts = {},
-    cmd = "TroubleToggle",
+    cmd = "Trouble",
   },
 
   -- ALE for additional linting

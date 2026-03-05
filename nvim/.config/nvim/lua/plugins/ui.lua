@@ -47,9 +47,13 @@ return {
     "mhinz/vim-startify",
     config = function()
       vim.g.startify_change_to_dir = 0
-      vim.g.startify_custom_header = vim.fn["startify#pad"](
-        vim.fn.split(vim.fn.system("figlet -w 100 '[ GitHub / GitCoin ]'"), "\n")
-      )
+      local header
+      if vim.fn.executable("figlet") == 1 then
+        header = vim.fn.split(vim.fn.system("figlet -w 100 '[ GitHub / GitCoin ]'"), "\n")
+      else
+        header = { "[ GitHub / GitCoin ]" }
+      end
+      vim.g.startify_custom_header = vim.fn["startify#pad"](header)
     end,
   },
 
