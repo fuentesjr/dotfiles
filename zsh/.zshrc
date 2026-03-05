@@ -22,7 +22,6 @@ alias ll="ls -al"
 alias zshrc="nvim ~/.zshrc"
 alias be="bundle exec"
 alias vimf="vim \$(fzf)"
-alias claude="/Users/sal/.claude/local/claude"
 
 # jujutsu completion
 autoload -U compinit
@@ -32,4 +31,18 @@ source <(jj util completion zsh)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(/usr/local/bin/brew shellenv)"
-eval "$(rbenv init - --no-rehash zsh)"
+
+# Tool managers
+eval "$(mise activate zsh)"
+#eval "$(rbenv init - --no-rehash zsh)"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# opencode
+export PATH=/Users/sal/.opencode/bin:$PATH
+
+# Added by GitButler installer
+eval "$(but completions zsh)"
+
+# Added by Antigravity
+export PATH="/Users/sal/.antigravity/antigravity/bin:$PATH"
