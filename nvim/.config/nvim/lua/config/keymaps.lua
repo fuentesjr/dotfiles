@@ -12,6 +12,7 @@ vim.g.camelcasemotion_key = "<leader>"
 
 -- Buffer navigation
 keymap("n", "<Tab>", function()
+  -- This keeps buffer-hopping from leaving behind accidental unsaved edits.
   if vim.bo.modifiable and not vim.bo.readonly and vim.bo.modified then
     vim.cmd("write")
   end
@@ -29,6 +30,7 @@ keymap("n", "<S-q>", ":bd<cr>", { noremap = true, silent = true, desc = "Delete 
 keymap("n", "<S-c>", ":clo<cr>", { noremap = true, silent = true, desc = "Close window" })
 
 -- Tab navigation
+-- Keep <C-v> free for Visual Block mode and use a leader mapping for tab creation.
 keymap("n", "<leader>tt", "<cmd>tabnew<cr>", { noremap = true, silent = true, desc = "New tab" })
 
 -- Duplicated keymaps kept for reference (inactive; defined in plugin/LSP configs)

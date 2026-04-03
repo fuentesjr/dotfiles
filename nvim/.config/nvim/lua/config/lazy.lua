@@ -2,6 +2,7 @@
 
 require("lazy").setup("plugins", {
   defaults = {
+    -- Opt into lazy-loading by default and mark only startup-critical plugins as eager.
     lazy = true, -- should plugins be lazy-loaded?
     version = false, -- always use the latest git commit
   },

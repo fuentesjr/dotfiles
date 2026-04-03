@@ -4,6 +4,7 @@ local M = {}
 M.reload_config = function()
   local modules_to_clear = {}
 
+  -- Lua caches required modules, so a straight :source won't pick up many config edits.
   for name in pairs(package.loaded) do
     if name == "config"
       or name:match("^config%.")
@@ -20,6 +21,7 @@ M.reload_config = function()
     package.loaded[name] = nil
   end
 
+  -- Re-run init.lua so bootstrap code and module loading happen in the normal order.
   local init_file = vim.env.MYVIMRC or (vim.fn.stdpath("config") .. "/init.lua")
   local ok, err = pcall(dofile, init_file)
 

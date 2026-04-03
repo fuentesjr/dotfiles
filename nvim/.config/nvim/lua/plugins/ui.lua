@@ -4,6 +4,7 @@ return {
   {
     "dracula/vim",
     name = "dracula",
+    -- Load the colorscheme early so later UI plugins inherit the intended highlights.
     lazy = false,
     priority = 1000,
     config = function()
@@ -44,6 +45,7 @@ return {
     config = function()
       vim.g.startify_change_to_dir = 0
       local header
+      -- Prefer a local figlet banner when available, but keep a plain-text fallback.
       if vim.fn.executable("figlet") == 1 then
         header = vim.fn.split(vim.fn.system("figlet -w 100 '[ GitHub / GitCoin ]'"), "\n")
       else

@@ -18,6 +18,7 @@ if not vim.uv.fs_stat(lazypath) then
   })
 end
 
+-- Guard against duplicate runtimepath entries when the config reloads itself.
 if not vim.tbl_contains(vim.opt.rtp:get(), lazypath) then
   vim.opt.rtp:prepend(lazypath)
 end

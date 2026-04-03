@@ -6,6 +6,7 @@ local autocmd = vim.api.nvim_create_autocmd
 
 -- Remove trailing spaces on save
 local TrimWhitespace = augroup("TrimWhitespace", { clear = true })
+-- Keep formats that intentionally use trailing whitespace readable as-authored.
 local trim_whitespace_exclusions = {
   diff = true,
   gitcommit = true,
@@ -21,6 +22,7 @@ autocmd("BufWritePre", {
       return
     end
 
+    -- Preserve the cursor/view so cleanup doesn't feel like a jumpy write hook.
     local view = vim.fn.winsaveview()
     vim.cmd([[%s/\s\+$//e]])
     vim.fn.winrestview(view)
@@ -37,6 +39,7 @@ autocmd("BufWritePost", {
     local config_root = vim.fn.stdpath("config")
 
     if current_file:sub(1, #config_root) == config_root then
+      -- Re-run the full Lua bootstrap instead of :source so require()'d modules refresh too.
       require("utils").reload_config()
     end
   end,
