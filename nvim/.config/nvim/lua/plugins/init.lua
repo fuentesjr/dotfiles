@@ -14,10 +14,12 @@ return {
   { import = "plugins.telescope" },
   { import = "plugins.treesitter" },
   { import = "plugins.lsp" },
+  { import = "plugins.formatting" },
   { import = "plugins.completion" },
   { import = "plugins.git" },
   { import = "plugins.lang" },
   { import = "plugins.navigation" },
+  { import = "plugins.debug" },
   { import = "plugins.utilities" },
   { import = "plugins.ai" },
 }

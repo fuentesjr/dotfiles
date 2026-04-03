@@ -20,16 +20,6 @@ return {
         lsp_gofumpt = true,
         dap_debug = true,
       })
-
-      -- Auto format and organize imports on save
-      local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*.go",
-        callback = function()
-          vim.lsp.buf.format({ async = false })
-        end,
-        group = format_sync_grp,
-      })
     end,
   },
 }

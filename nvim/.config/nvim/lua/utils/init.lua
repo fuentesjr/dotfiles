@@ -51,16 +51,16 @@ M.open_plugin_homepage = function()
   end
 end
 
--- Set up the plugin homepage keymap for vim files
+-- Set up the plugin homepage keymap for vim and lua files
 vim.api.nvim_create_augroup("UtilsVimrc", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
   group = "UtilsVimrc",
-  pattern = "vim",
+  pattern = { "vim", "lua" },
   callback = function()
-    vim.keymap.set("n", "gp", M.open_plugin_homepage, { 
-      buffer = true, 
-      silent = true, 
-      desc = "Open plugin homepage" 
+    vim.keymap.set("n", "gp", M.open_plugin_homepage, {
+      buffer = true,
+      silent = true,
+      desc = "Open plugin homepage"
     })
   end,
 })

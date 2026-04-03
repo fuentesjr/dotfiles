@@ -16,10 +16,6 @@ opt.tabstop = 4
 
 -- Auto reload files if they change
 opt.autoread = true
-vim.api.nvim_create_autocmd({"FocusGained", "BufEnter"}, {
-  pattern = "*",
-  command = "checktime"
-})
 
 -- Terminal colors
 opt.termguicolors = true
@@ -39,6 +35,8 @@ opt.incsearch = true
 opt.wrap = false
 opt.scrolloff = 8
 opt.sidescrolloff = 8
+opt.smoothscroll = true
+opt.relativenumber = true
 
 -- Split behavior
 opt.splitbelow = true

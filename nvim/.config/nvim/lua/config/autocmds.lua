@@ -45,6 +45,35 @@ autocmd("BufWritePost", {
   end,
 })
 
+-- Auto reload files when returning to Neovim
+local AutoRead = augroup("AutoRead", { clear = true })
+autocmd({ "FocusGained", "BufEnter" }, {
+  group = AutoRead,
+  pattern = "*",
+  command = "checktime",
+})
+
+-- Toggle relative numbers on focus/mode
+local NumberToggle = augroup("NumberToggle", { clear = true })
+autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
+  group = NumberToggle,
+  pattern = "*",
+  callback = function()
+    if vim.wo.number and vim.fn.mode() ~= "i" then
+      vim.wo.relativenumber = true
+    end
+  end,
+})
+autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+  group = NumberToggle,
+  pattern = "*",
+  callback = function()
+    if vim.wo.number then
+      vim.wo.relativenumber = false
+    end
+  end,
+})
+
 -- Highlight on yank
 local HighlightYank = augroup("HighlightYank", { clear = true })
 autocmd("TextYankPost", {

@@ -2,7 +2,7 @@
 return {
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.5",
+    tag = "v0.2.2",
     dependencies = {
       "nvim-lua/plenary.nvim",
       {
@@ -12,14 +12,14 @@ return {
     },
     cmd = "Telescope",
     keys = {
-      { "<leader>sf", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
-      { "<leader>cb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search Current Buffer" },
-      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Search Text (Live Grep)" },
-      { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Search Word Under Cursor" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Find Open Buffers" },
-      { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Find Help Tags" },
-      { "<leader>km", "<cmd>Telescope keymaps<cr>", desc = "Find Keymaps" },
-      { "<leader>bb", "<cmd>Telescope builtin<cr>", desc = "Find Telescope Pickers" },
+      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files" },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Live Grep" },
+      { "<leader>fw", "<cmd>Telescope grep_string<cr>", desc = "Grep Word Under Cursor" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
+      { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help Tags" },
+      { "<leader>fc", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Current Buffer" },
+      { "<leader>fk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps" },
+      { "<leader>fp", "<cmd>Telescope builtin<cr>", desc = "Telescope Pickers" },
     },
     config = function()
       local telescope = require("telescope")

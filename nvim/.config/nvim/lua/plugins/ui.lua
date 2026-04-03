@@ -23,47 +23,60 @@ return {
 
   -- Statusline
   {
-    "vim-airline/vim-airline",
+    "nvim-lualine/lualine.nvim",
     lazy = false,
-    dependencies = { "vim-airline/vim-airline-themes" },
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      vim.g.airline_powerline_fonts = 1
-      vim.g.airline_theme = "light"
-      vim.g["airline#extensions#tabline#enabled"] = 1
+      require("lualine").setup({
+        options = {
+          theme = "dracula",
+          section_separators = { left = "", right = "" },
+          component_separators = { left = "", right = "" },
+        },
+        sections = {
+          lualine_a = { "mode" },
+          lualine_b = { "branch", "diff", "diagnostics" },
+          lualine_c = { "filename" },
+          lualine_x = { "encoding", "fileformat", "filetype" },
+          lualine_y = { "progress" },
+          lualine_z = { "location" },
+        },
+        tabline = {
+          lualine_a = { "buffers" },
+          lualine_z = { "tabs" },
+        },
+      })
     end,
   },
 
+  -- Dashboard
   {
-    "vim-airline/vim-airline-themes",
-    lazy = true,
-  },
-
-  -- Startify splash screen
-  {
-    "mhinz/vim-startify",
+    "goolord/alpha-nvim",
     lazy = false,
+    dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      vim.g.startify_change_to_dir = 0
-      local header
-      -- Prefer a local figlet banner when available, but keep a plain-text fallback.
+      local alpha = require("alpha")
+      local dashboard = require("alpha.themes.dashboard")
+
       if vim.fn.executable("figlet") == 1 then
-        header = vim.fn.split(vim.fn.system("figlet -w 100 '[ GitHub / GitCoin ]'"), "\n")
+        dashboard.section.header.val =
+          vim.fn.split(vim.fn.system("figlet -w 100 '[ GitHub / GitCoin ]'"), "\n")
       else
-        header = { "[ GitHub / GitCoin ]" }
+        dashboard.section.header.val = { "[ GitHub / GitCoin ]" }
       end
-      vim.g.startify_custom_header = vim.fn["startify#pad"](header)
+
+      dashboard.section.buttons.val = {
+        dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
+        dashboard.button("r", "  Recent files", ":Telescope oldfiles<CR>"),
+        dashboard.button("g", "  Live grep", ":Telescope live_grep<CR>"),
+        dashboard.button("c", "  Config", ":Telescope find_files cwd=" .. vim.fn.stdpath("config") .. "<CR>"),
+        dashboard.button("l", "󰒲  Lazy", ":Lazy<CR>"),
+        dashboard.button("q", "  Quit", ":qa<CR>"),
+      }
+
+      alpha.setup(dashboard.config)
     end,
   },
 
-  -- Smooth scrolling
-  {
-    "psliwka/vim-smoothie",
-    event = "VeryLazy",
-  },
 
-  -- Number toggle
-  {
-    "jeffkreeftmeijer/vim-numbertoggle",
-    event = "VeryLazy",
-  },
 }

@@ -34,15 +34,27 @@ return {
     event = "VeryLazy",
     dependencies = { "tpope/vim-repeat" },
     config = function()
-      require("leap").set_default_keymaps()
+      require("leap").create_default_mappings()
     end,
   },
 
-  -- Tagbar
+  -- Code outline via LSP/treesitter
   {
-    "preservim/tagbar",
+    "stevearc/aerial.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
     keys = {
-      { "<leader>tb", ":TagbarToggle<cr>", desc = "Toggle Tagbar" },
+      { "<leader>o", "<cmd>AerialToggle!<cr>", desc = "Toggle Outline" },
+    },
+    opts = {
+      backends = { "lsp", "treesitter", "markdown" },
+      layout = {
+        min_width = 30,
+        default_direction = "right",
+      },
+      filter_kind = false,
     },
   },
 

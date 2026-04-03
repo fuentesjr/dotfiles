@@ -4,6 +4,10 @@ return {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     event = { "BufReadPost", "BufNewFile" },
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      "RRethy/nvim-treesitter-endwise",
+    },
     config = function()
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
@@ -54,13 +58,10 @@ return {
             },
           },
         },
+        endwise = {
+          enable = true,
+        },
       })
     end,
-  },
-  
-  -- Treesitter textobjects
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
 }
