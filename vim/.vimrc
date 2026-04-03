@@ -8,8 +8,12 @@
 set nocompatible
 set showmatch
 set nu
-set nocp
 set ruler
+set hidden
+set ignorecase
+set smartcase
+set scrolloff=5
+set clipboard=unnamed
 
 set expandtab
 set shiftwidth=2
@@ -30,7 +34,6 @@ Plug 'neovim/nvim-lspconfig'
 
 " Optional: Better LSP UI
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
 
 " Optional: Autocompletion
 Plug 'hrsh7th/nvim-cmp'
@@ -49,7 +52,6 @@ Plug 'github/copilot.vim'
 
 """ LSP
 Plug 'ryanoasis/vim-devicons'
-Plug 'neovim/nvim-lspconfig'
 Plug 'dense-analysis/ale'
 
 """ Navigation
@@ -76,7 +78,6 @@ Plug 'folke/trouble.nvim'
 
 """ Search/Finding
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim' , { 'tag': '0.1.5' }
 " or                                , { 'branch': '0.1.x' }
 
@@ -131,6 +132,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#ale#enabled = 1
 
 " ALE https://github.com/dense-analysis/ale
+" Disable ALE's LSP to avoid conflicts with nvim-lspconfig
+let g:ale_disable_lsp = 1
 let g:ale_ruby_ruby_executable = 'bin/safe-ruby'
 
 " Hardtime settings :/
@@ -145,10 +148,10 @@ let g:list_of_disabled_keys = []
 
 
 " Run Ruby code
-autocmd BufRead, *.rb nmap <Leader>r :silent !{ruby %}<cr>
+autocmd BufRead,BufNewFile *.rb nmap <Leader>r :silent !ruby %<cr>
 
-" Reload config after we save changes to it
-autocmd BufWritePost .vimrc source $MYVIMRC
+" Reload config after we save changes to it (works with symlinks)
+autocmd BufWritePost * if expand('<afile>:p') == expand($MYVIMRC) | source $MYVIMRC | endif
 
 " Telescope command-line sugar.
 nnoremap <leader>ff <cmd>Telescope find_files<cr>
@@ -183,15 +186,14 @@ map <silent> <S-c> :clo<cr>
 " Prompt for a command to run
 map <Leader>vp :VimuxPromptCommand<cr>
 
-:nmap <C-v> :tabnew <C-d>
-:imap <C-v> <ESC>:tabnew <C-d>
-
-map ,, :NERDTree<cr>
+map <leader>n :NERDTree<cr>
 
 
 " vim-startify splash screen setting
 let g:startify_change_to_dir = 0
-let g:startify_custom_header = startify#pad(split(system('figlet -w 100 [ GitHub / GitCoin ]'), '\n'))
+if executable('figlet')
+  let g:startify_custom_header = startify#pad(split(system('figlet -w 100 [ GitHub / GitCoin ]'), '\n'))
+endif
 
 :imap <C-k> <ESC>:Copilot panel<cr>
 
