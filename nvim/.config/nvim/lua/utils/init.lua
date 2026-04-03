@@ -1,6 +1,35 @@
 -- Utility functions
 local M = {}
 
+M.reload_config = function()
+  local modules_to_clear = {}
+
+  for name in pairs(package.loaded) do
+    if name == "config"
+      or name:match("^config%.")
+      or name == "plugins"
+      or name:match("^plugins%.")
+      or name == "utils"
+      or name:match("^utils%.")
+    then
+      table.insert(modules_to_clear, name)
+    end
+  end
+
+  for _, name in ipairs(modules_to_clear) do
+    package.loaded[name] = nil
+  end
+
+  local init_file = vim.env.MYVIMRC or (vim.fn.stdpath("config") .. "/init.lua")
+  local ok, err = pcall(dofile, init_file)
+
+  if ok then
+    vim.notify("Config reloaded!")
+  else
+    vim.notify("Config reload failed:\n" .. err, vim.log.levels.ERROR)
+  end
+end
+
 -- Function to open plugin homepage (migrated from .vimrc)
 M.open_plugin_homepage = function()
   local line = vim.fn.getline(".")

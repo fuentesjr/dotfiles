@@ -19,6 +19,7 @@ return {
         
         -- Testing
         { "<leader>t", desc = "Run Nearest Test" },
+        { "<leader>tt", desc = "New Tab" },
         { "<leader>T", desc = "Run Test File" },
         { "<leader>a", desc = "Run Test Suite" },
         { "<leader>l", desc = "Run Last Test" },
@@ -122,6 +123,7 @@ return {
 
   {
     "RyanMillerC/better-vim-tmux-resizer",
+    event = "VeryLazy",
     config = function()
       vim.g.tmux_resizer_resize_count = 3
       vim.g.tmux_resizer_vertical_resize_count = 3

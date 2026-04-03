@@ -31,6 +31,7 @@ return {
   -- Motion plugin (leap)
   {
     "ggandor/leap.nvim",
+    event = "VeryLazy",
     dependencies = { "tpope/vim-repeat" },
     config = function()
       require("leap").set_default_keymaps()
@@ -48,6 +49,7 @@ return {
   -- CamelCase motion
   {
     "bkad/CamelCaseMotion",
+    event = "VeryLazy",
     config = function()
       vim.g.camelcasemotion_key = "<leader>"
     end,

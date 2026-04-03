@@ -6,6 +6,7 @@ return {
   {
     "folke/lazy.nvim",
     tag = "stable",
+    lazy = false,
   },
 
   -- Load other plugin modules

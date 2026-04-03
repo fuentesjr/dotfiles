@@ -3,6 +3,7 @@
 
 local keymap = vim.keymap.set
 local opts = { noremap = true, silent = true }
+local utils = require("utils")
 
 -- Leader key is set in init.lua
 
@@ -28,8 +29,7 @@ keymap("n", "<S-q>", ":bd<cr>", { noremap = true, silent = true, desc = "Delete 
 keymap("n", "<S-c>", ":clo<cr>", { noremap = true, silent = true, desc = "Close window" })
 
 -- Tab navigation
-keymap("n", "<C-v>", ":tabnew ", { noremap = true, desc = "New tab" })
-keymap("i", "<C-v>", "<ESC>:tabnew ", { noremap = true, desc = "New tab" })
+keymap("n", "<leader>tt", "<cmd>tabnew<cr>", { noremap = true, silent = true, desc = "New tab" })
 
 -- Duplicated keymaps kept for reference (inactive; defined in plugin/LSP configs)
 -- Copilot
@@ -78,9 +78,12 @@ keymap("i", "<C-v>", "<ESC>:tabnew ", { noremap = true, desc = "New tab" })
 
 -- Config shortcuts
 keymap("n", "<leader>vm", ":vsp ~/.config/nvim/init.lua<cr>", opts)
-keymap("n", "<leader>sv", ":source ~/.config/nvim/init.lua<cr>", opts)
+keymap("n", "<leader>sv", utils.reload_config, { noremap = true, silent = true, desc = "Reload Neovim config" })
 keymap("n", "<leader>vc", function() require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") }) end, { desc = "Search config files" })
 keymap("n", "<leader>zl", ":vsp ~/.config/zellij/config.kdl<cr>", opts)
 
 -- Fix resize issue
-keymap("n", "<leader>cc", ":so ~/.config/nvim/init.lua<cr>:resize<cr>", opts)
+keymap("n", "<leader>cc", function()
+  utils.reload_config()
+  vim.cmd("resize")
+end, { noremap = true, silent = true, desc = "Reload config + resize" })

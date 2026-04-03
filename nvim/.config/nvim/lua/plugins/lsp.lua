@@ -176,12 +176,4 @@ return {
     },
   },
 
-  -- ALE for additional linting
-  {
-    "dense-analysis/ale",
-    config = function()
-      vim.g.ale_ruby_ruby_executable = "bin/safe-ruby"
-      vim.g.airline_extensions_ale_enabled = 1
-    end,
-  },
 }

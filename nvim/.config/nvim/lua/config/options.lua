@@ -4,7 +4,6 @@
 local opt = vim.opt
 
 -- Compatibility and basic settings
-opt.compatible = false
 opt.number = true
 opt.ruler = true
 opt.showmatch = true
@@ -21,9 +20,6 @@ vim.api.nvim_create_autocmd({"FocusGained", "BufEnter"}, {
   pattern = "*",
   command = "checktime"
 })
-
--- Enable syntax highlighting
-vim.cmd("syntax on")
 
 -- Terminal colors
 opt.termguicolors = true

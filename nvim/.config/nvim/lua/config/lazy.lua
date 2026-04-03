@@ -2,7 +2,7 @@
 
 require("lazy").setup("plugins", {
   defaults = {
-    lazy = false, -- should plugins be lazy-loaded?
+    lazy = true, -- should plugins be lazy-loaded?
     version = false, -- always use the latest git commit
   },
   ui = {

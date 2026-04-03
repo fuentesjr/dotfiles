@@ -4,6 +4,7 @@ return {
   {
     "dracula/vim",
     name = "dracula",
+    lazy = false,
     priority = 1000,
     config = function()
       vim.cmd.colorscheme("dracula")
@@ -19,21 +20,15 @@ return {
     end,
   },
 
-  -- Dev icons (legacy support)
-  {
-    "ryanoasis/vim-devicons",
-    lazy = true,
-  },
-
   -- Statusline
   {
     "vim-airline/vim-airline",
+    lazy = false,
     dependencies = { "vim-airline/vim-airline-themes" },
     config = function()
       vim.g.airline_powerline_fonts = 1
       vim.g.airline_theme = "light"
       vim.g["airline#extensions#tabline#enabled"] = 1
-      vim.g["airline#extensions#ale#enabled"] = 1
     end,
   },
 
@@ -45,6 +40,7 @@ return {
   -- Startify splash screen
   {
     "mhinz/vim-startify",
+    lazy = false,
     config = function()
       vim.g.startify_change_to_dir = 0
       local header
