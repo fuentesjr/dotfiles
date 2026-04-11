@@ -53,3 +53,23 @@ opt.signcolumn = "yes"
 
 -- Mouse support
 opt.mouse = "a"
+
+-- Use the system clipboard for all yank/delete/put operations by default.
+opt.clipboard = "unnamedplus"
+
+-- Be explicit about the macOS clipboard provider so copy/paste works even if
+-- provider autodetection is inconsistent across terminal environments.
+if vim.fn.has("mac") == 1 and vim.fn.executable("pbcopy") == 1 and vim.fn.executable("pbpaste") == 1 then
+  vim.g.clipboard = {
+    name = "macOS-clipboard",
+    copy = {
+      ["+"] = "pbcopy",
+      ["*"] = "pbcopy",
+    },
+    paste = {
+      ["+"] = "pbpaste",
+      ["*"] = "pbpaste",
+    },
+    cache_enabled = 0,
+  }
+end
