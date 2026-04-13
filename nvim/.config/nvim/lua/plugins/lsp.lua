@@ -9,23 +9,9 @@ return {
       "williamboman/mason-lspconfig.nvim",
     },
     config = function()
-      local lspconfig = require("lspconfig")
       local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-      require("mason-lspconfig").setup({
-        ensure_installed = {
-          "gopls",
-          "solargraph", -- Ruby
-          "lua_ls",
-          "ts_ls",
-        },
-        automatic_installation = true,
-      })
-
-      -- Enhanced capabilities for completion
       local capabilities = cmp_nvim_lsp.default_capabilities()
 
-      -- LSP keymaps function
       local on_attach = function(client, bufnr)
         local opts = { noremap = true, silent = true, buffer = bufnr }
 
@@ -37,15 +23,9 @@ return {
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
-        -- Document highlight
         if client and client.server_capabilities and client.server_capabilities.documentHighlightProvider then
-          vim.api.nvim_create_augroup("lsp_document_highlight", {
-            clear = false,
-          })
-          vim.api.nvim_clear_autocmds({
-            buffer = bufnr,
-            group = "lsp_document_highlight",
-          })
+          vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
+          vim.api.nvim_clear_autocmds({ buffer = bufnr, group = "lsp_document_highlight" })
           vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
             group = "lsp_document_highlight",
             buffer = bufnr,
@@ -59,57 +39,41 @@ return {
         end
       end
 
-      -- Go LSP setup
-      lspconfig.gopls.setup({
-        on_attach = on_attach,
+      local shared = {
         capabilities = capabilities,
+        on_attach = on_attach,
+      }
+
+      vim.lsp.config("gopls", vim.tbl_extend("force", shared, {
         settings = {
           gopls = {
-            analyses = {
-              unusedparams = true,
-            },
+            analyses = { unusedparams = true },
             staticcheck = true,
             gofumpt = true,
           },
         },
-      })
+      }))
 
-      -- Ruby LSP setup
-      lspconfig.solargraph.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
+      vim.lsp.config("solargraph", shared)
 
-      -- Lua LSP setup
-      lspconfig.lua_ls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
+      vim.lsp.config("lua_ls", vim.tbl_extend("force", shared, {
         settings = {
           Lua = {
-            runtime = {
-              version = "LuaJIT",
-            },
-            diagnostics = {
-              globals = { "vim" },
-            },
+            runtime = { version = "LuaJIT" },
+            diagnostics = { globals = { "vim" } },
             workspace = {
               library = vim.api.nvim_get_runtime_file("", true),
               checkThirdParty = false,
             },
-            telemetry = {
-              enable = false,
-            },
+            telemetry = { enable = false },
           },
         },
-      })
+      }))
 
-      -- TypeScript LSP setup
-      lspconfig.ts_ls.setup({
-        on_attach = on_attach,
-        capabilities = capabilities,
-      })
+      vim.lsp.config("ts_ls", shared)
 
-      -- Global LSP settings
+      vim.lsp.enable({ "gopls", "solargraph", "lua_ls", "ts_ls" })
+
       local diagnostic_signs = {
         [vim.diagnostic.severity.ERROR] = " ",
         [vim.diagnostic.severity.WARN] = " ",
@@ -118,12 +82,8 @@ return {
       }
 
       vim.diagnostic.config({
-        virtual_text = {
-          prefix = "●",
-        },
-        signs = {
-          text = diagnostic_signs,
-        },
+        virtual_text = { prefix = "●" },
+        signs = { text = diagnostic_signs },
         underline = true,
         update_in_insert = false,
         severity_sort = true,
@@ -153,6 +113,17 @@ return {
   {
     "williamboman/mason-lspconfig.nvim",
     dependencies = { "mason.nvim", "nvim-lspconfig" },
+    config = function()
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          "gopls",
+          "solargraph",
+          "lua_ls",
+          "ts_ls",
+        },
+        automatic_installation = true,
+      })
+    end,
   },
 
   -- Trouble for diagnostics
@@ -170,5 +141,4 @@ return {
       { "gR", "<cmd>Trouble lsp toggle focus=false win.position=right<cr>", desc = "LSP: References (Trouble)" },
     },
   },
-
 }
