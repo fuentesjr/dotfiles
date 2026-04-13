@@ -15,10 +15,12 @@ if type rg &> /dev/null; then
 fi
 
 # Personal aliases
+alias ls="eza --group-directories-first --icons=always --color=always"
 alias ll="ls -al"
 alias zshrc="nvim ~/.zshrc"
 alias be="bundle exec"
 alias vimf="nvim \$(fzf)"
+alias showpath='echo "$PATH" | tr ":" "\n"'
 
 # Completions (cached, refreshed every 24h)
 autoload -U compinit
