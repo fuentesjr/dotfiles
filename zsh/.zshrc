@@ -1,48 +1,41 @@
-# User configuration
-
-# export GPG_TTY=$(tty) ## So that are git commits get auto signed
-#
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
+typeset -U PATH
 
 export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-export PATH="$HOME/.local/bin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
 export EDITOR="nvim"
-export ARCHFLAGS="-arch x86_64"
+# export GPG_TTY=$(tty)
+
+export PATH="$HOME/.local/bin:$GOPATH/bin:$HOME/.opencode/bin:$HOME/.antigravity/antigravity/bin:$BUN_INSTALL/bin:$PATH"
+
+eval "$(/usr/local/bin/brew shellenv)"
+
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
   export FZF_DEFAULT_OPTS='--height 70% --border'
 fi
-export DISABLE_SPRING=true
 
 # Personal aliases
 alias ll="ls -al"
 alias zshrc="nvim ~/.zshrc"
 alias be="bundle exec"
-alias vimf="vim \$(fzf)"
+alias vimf="nvim \$(fzf)"
 
-# jujutsu completion
+# Completions (cached, refreshed every 24h)
 autoload -U compinit
-compinit
-source <(jj util completion zsh)
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
+
+command -v jj &>/dev/null && source <(jj util completion zsh)
+command -v but &>/dev/null && eval "$(but completions zsh)"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-eval "$(/usr/local/bin/brew shellenv)"
+[ -s "$BUN_INSTALL/_bun" ] && source "$BUN_INSTALL/_bun"
 
 # Tool managers
-eval "$(mise activate zsh)"
-#eval "$(rbenv init - --no-rehash zsh)"
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+command -v mise &>/dev/null && eval "$(mise activate zsh)"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
-
-# opencode
-export PATH=/Users/sal/.opencode/bin:$PATH
-
-# Added by GitButler installer
-eval "$(but completions zsh)"
-
-# Added by Antigravity
-export PATH="/Users/sal/.antigravity/antigravity/bin:$PATH"
