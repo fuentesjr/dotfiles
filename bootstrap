@@ -1,48 +1,27 @@
 #!/bin/bash
 # Run by codespaces after starting
+set -euo pipefail
 
-#exec > >(tee -i $HOME/dotfiles_install.log)
-#exec 2>&1
-#set -x
+cd "$(dirname "$0")"
 
-# Install neovim
-# Note, neovim is now being preinstalled in codespaces
-# sudo apt-get update -y
-# sudo apt-get install -y fuse libfuse2
-# sudo groupadd fuse
-# sudo usermod -aG fuse "$(whoami)"
-# wget https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
-# chmod u+x nvim.appimage
-# sudo mv nvim.appimage /usr/bin/nvim
+backup() {
+  local src="$1"
+  if [[ -f "$src" && ! -L "$src" ]]; then
+    cp "$src" "${src}.stock"
+    echo "Backed up $src"
+  fi
+}
 
+backup "$HOME/.gitconfig"
+backup "$HOME/.bashrc"
+backup "$HOME/.zshrc"
 
-mv $HOME/.gitconfig $HOME/.gitconfig.stock
-cp $HOME/.bashrc $HOME/.bashrc.stock
-mv $HOME/.zshrc $HOME/.zshrc.stock
-#ln -s /workspaces/.codespaces/.persistedshare/dotfiles/ $HOME
+echo "Installing packages..."
+brew install fzf figlet ripgrep fd-find stow neovim
 
-brew install fzf figlet ripgrep fd-find
-brew install stow
-
+echo "Installing ctags..."
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-echo "building ctags"
 script/build-ctags > /dev/null 2>&1
 
-# gh extension install https://github.com/rneatherway/gh-slack
-
-#echo "Installing rdm"
-#wget https://github.com/BlakeWilliams/remote-development-manager/releases/latest/download/rdm-linux-amd64
-#sudo mv rdm-linux-amd64 /usr/local/bin/rdm
-#sudo chmod +x /usr/local/bin/rdm
-#gh config set browser "rdm open"
-#alias open="rdm open"
-#alias xdg-open="rdm open"
-
-# Setup zellij
-rustup update
-#cargo install --locked zellij
-#zellij setup --generate-completion bash >> ~/.bashrc
-
-# Stow dotfiles
-echo 'Stowing dotfiles...'
-stow --target=$HOME zsh git vim nvim jj
+echo "Stowing dotfiles..."
+stow --target="$HOME" zsh git vim nvim jj tmux
