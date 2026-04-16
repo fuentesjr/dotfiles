@@ -78,5 +78,36 @@ return {
     end,
   },
 
-
+  -- Animated visual feedback for edits
+  {
+    "rachartier/tiny-glimmer.nvim",
+    event = "VeryLazy",
+    priority = 10,
+    config = function()
+      require("tiny-glimmer").setup({
+        disable_warnings = true,
+        hijack_ft_disabled = { "alpha", "snacks_dashboard" },
+        overwrite = {
+          yank = {
+            enabled = true,
+            default_animation = "fade",
+          },
+          paste = {
+            enabled = true,
+            default_animation = "reverse_fade",
+          },
+          search = {
+            enabled = true,
+            default_animation = "pulse",
+          },
+          undo = {
+            enabled = false,
+          },
+          redo = {
+            enabled = false,
+          },
+        },
+      })
+    end,
+  },
 }

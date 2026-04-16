@@ -25,7 +25,7 @@ Leader key: `Space`
 │   │   ├── navigation.lua    # nvim-tree, leap, aerial.nvim, CamelCaseMotion
 │   │   ├── telescope.lua     # Telescope v0.2.2 + fzf-native
 │   │   ├── treesitter.lua    # Treesitter + textobjects + endwise
-│   │   ├── ui.lua            # dracula, lualine, alpha-nvim
+│   │   ├── ui.lua            # dracula, lualine, alpha-nvim, tiny-glimmer
 │   │   ├── utilities.lua     # which-key, surround, comment, vim-test, vimux, hardtime, FTerm, zk
 │   │   └── lang/
 │   │       ├── go.lua        # go.nvim
@@ -217,6 +217,19 @@ Requires [zk](https://github.com/mickael-menu/zk) CLI installed.
 | `S{char}{char}` | Leap backward |
 | `Space w/b/e` | CamelCase word motions |
 
+## UI / Visual Feedback
+
+Yank and paste use `tiny-glimmer.nvim` animations by default:
+
+- Yank uses `fade`
+- Paste uses `reverse_fade`
+- Search navigation uses `pulse`
+- Undo and redo animations are currently disabled
+
+### TinyGlimmer Commands
+
+`:TinyGlimmer enable`, `:TinyGlimmer disable`, `:TinyGlimmer fade`, `:TinyGlimmer reverse_fade`, `:TinyGlimmer bounce`, `:TinyGlimmer left_to_right`, `:TinyGlimmer pulse`, `:TinyGlimmer rainbow`
+
 ## Text Editing
 
 | Key | Action |
@@ -264,7 +277,7 @@ Requires [zk](https://github.com/mickael-menu/zk) CLI installed.
 
 - **Trim trailing whitespace** on save (except markdown, gitcommit, diff, text)
 - **Auto-reload config** when saving any Lua file under `~/.config/nvim/`
-- **Highlight on yank** (200ms, Visual highlight group)
+- **Highlight on yank** (fallback Visual highlight before lazy UI plugins take over)
 - **Auto checktime** on focus gained / buffer enter
 - **Number toggle** -- relative numbers in normal mode, absolute in insert mode
 
@@ -275,6 +288,7 @@ Requires [zk](https://github.com/mickael-menu/zk) CLI installed.
 | dracula/vim | Theme | startup |
 | nvim-lualine/lualine.nvim | Statusline | startup |
 | goolord/alpha-nvim | Dashboard | startup |
+| rachartier/tiny-glimmer.nvim | Edit animations | VeryLazy |
 | nvim-tree/nvim-web-devicons | Icons | lazy |
 | nvim-telescope/telescope.nvim | Finder | cmd/keys |
 | nvim-treesitter/nvim-treesitter | Syntax | BufRead |

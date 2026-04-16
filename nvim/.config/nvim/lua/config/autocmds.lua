@@ -79,7 +79,11 @@ local HighlightYank = augroup("HighlightYank", { clear = true })
 autocmd("TextYankPost", {
   group = HighlightYank,
   callback = function()
+    -- tiny-glimmer provides its own yank animation once loaded.
+    if package.loaded["tiny-glimmer"] then
+      return
+    end
+
     vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
   end,
 })
-
