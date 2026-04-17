@@ -58,12 +58,30 @@ return {
       local alpha = require("alpha")
       local dashboard = require("alpha.themes.dashboard")
 
-      if vim.fn.executable("figlet") == 1 then
-        dashboard.section.header.val =
-          vim.fn.split(vim.fn.system("figlet -w 100 '[ GitHub / GitCoin ]'"), "\n")
-      else
-        dashboard.section.header.val = { "[ GitHub / GitCoin ]" }
-      end
+      vim.api.nvim_set_hl(0, "AlphaHeaderBlue", { fg = "#8be9fd" })
+
+      dashboard.section.header.val = {
+        [[=================     ===============     ===============   ========  ========]],
+        [[\\ . . . . . . .\\   //. . . . . . .\\   //. . . . . . .\\  \\. . .\\// . . //]],
+        [[||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\/ . . .||]],
+        [[|| . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . ||]],
+        [[||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .||]],
+        [[|| . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\ . . . . ||]],
+        [[||. . ||   ||-'  || ||  `-||   || . .|| ||. . ||   ||-'  || ||  `|\_ . .|. .||]],
+        [[|| . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\ `-_/| . ||]],
+        [[||_-' ||  .|/    || ||    \|.  || `-_|| ||_-' ||  .|/    || ||   | \  / |-_.||]],
+        [[||    ||_-'      || ||      `-_||    || ||    ||_-'      || ||   | \  / |  `||]],
+        [[||    `'         || ||         `'    || ||    `'         || ||   | \  / |   ||]],
+        [[||            .===' `===.         .==='.`===.         .===' /==. |  \/  |   ||]],
+        [[||         .=='   \_|-_ `===. .==='   _|_   `===. .===' _-|/   `==  \/  |   ||]],
+        [[||      .=='    _-'    `-_  `='    _-'   `-_    `='  _-'   `-_  /|  \/  |   ||]],
+        [[||   .=='    _-'          '-__\._-'         '-_./__-'         `' |. /|  |   ||]],
+        [[||.=='    _-'                                                     `' |  /==.||]],
+        [[=='    _-'                        N E O V I M                         \/   `==]],
+        [[\   _-'                                                                `-_   /]],
+        [[ `''                                                                      ``' ]],
+      }
+      dashboard.section.header.opts.hl = "AlphaHeaderBlue"
 
       dashboard.section.buttons.val = {
         dashboard.button("f", "  Find file", ":Telescope find_files<CR>"),
@@ -73,6 +91,8 @@ return {
         dashboard.button("l", "󰒲  Lazy", ":Lazy<CR>"),
         dashboard.button("q", "  Quit", ":qa<CR>"),
       }
+      dashboard.section.buttons.opts.hl = "Keyword"
+      dashboard.opts.layout[1].val = 6
 
       alpha.setup(dashboard.config)
     end,

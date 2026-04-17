@@ -1,5 +1,14 @@
 -- Navigation plugins
 return {
+  -- Navigation model:
+  --   Ctrl-h/j/k/l  -> shared Neovim/tmux navigation via vim-tmux-navigator
+  --   Alt-Arrow     -> tmux-only pane movement
+  --   Alt-h/j/k/l   -> tmux pane resizing
+  {
+    "christoomey/vim-tmux-navigator",
+    lazy = false,
+  },
+
   -- File explorer (modernized NERDTree)
   {
     "nvim-tree/nvim-tree.lua",
