@@ -1,8 +1,9 @@
-[credential]
-        helper = cache
 [user]
   name = Salvador Fuentes Jr.
   email = fuentesjr@gmail.com
+
+[include]
+  path = ~/.gitconfig.local
 
 [alias]
   st = status
@@ -16,7 +17,81 @@
   graph = log --graph
   dec = log --pretty=oneline --decorate
   sub = submodule
-  tp = "!f() { GITHUB_TOKEN=$MYPAT git push; }; f"
+
+  # Review shortcuts: use Git history to decide what to read first.
+  # Shows a recent activity stream like:
+  # 2026-04-10 a1b2c3d Jane Doe revert flaky cache invalidation
+  recent = log --date=short --pretty=format:%ad%x20%h%x20%an%x20%s --since=90.days.ago
+
+  # Top changed files in the last year. Start here for likely hotspots.
+  # Output looks like:
+  # 128 app/services/billing/reconciler.rb
+  churn = !git log --format=format: --name-only --since='1 year ago' | sed '/^$/d' | sort | uniq -c | sort -nr | head -30
+
+  # Same idea as `git churn`, but grouped by directory for larger repos.
+  # Output looks like:
+  # 402 app/services/billing
+  churn-dirs = !git log --format=format: --name-only --since='1 year ago' | sed '/^$/d' | xargs -n1 dirname | sort | uniq -c | sort -nr | head -20
+
+  # Contributors active in the last 6 months. Good for current ownership hints.
+  # Output looks like:
+  # 87  Jane Doe
+  authors-recent = shortlog -sn --since=6.months.ago --all --no-merges
+
+  # Commit volume by month for the whole repo. Useful for trend shape, not team health.
+  # Output looks like:
+  # 142 2026-03
+  monthly = !git log --format=%ad --date=format:%Y-%m | sort | uniq -c
+
+  # Top contributors for a specific file or directory.
+  # Output looks like:
+  # 38 Jane Doe
+  owners = !f() { git shortlog -sn --all --no-merges -- "$@"; }; f
+
+  # Files that recur in repair-shaped commits. Heuristic only; depends on commit messages.
+  # Output looks like:
+  # 14 app/models/invoice.rb
+  bug-files = !git log -i -E --grep='fix|bug|broken' --name-only --format='' --since='1 year ago' | sed '/^$/d' | sort | uniq -c | sort -nr | head -20
+
+  # Incident / rollback flavored commits. Narrower than `git bug-files`.
+  # Output looks like:
+  # 9f8e7d6 hotfix rollback webhook retry change
+  firefights = log --oneline --since=1.year.ago --grep=revert --grep=hotfix --grep=emergency --grep=rollback -i --extended-regexp
+
+  # Convenience wrapper: show both repair signals together.
+  # Shows two sections:
+  # == bug-files ==  /  == firefights ==
+  repairs = !f() { printf '== bug-files ==\n'; git bug-files; printf '\n== firefights ==\n'; git firefights; }; f
+
+  # Local branch tracking status and upstream divergence.
+  # Output looks like:
+  # feature/cache-fix 1234abc [origin/feature/cache-fix: ahead 2]
+  branches = branch -vv
+
+  # Commits on upstream that you do not have locally yet.
+  # Output looks like:
+  # 9f8e7d6 (origin/main) fix flaky billing retry
+  incoming = log --oneline --decorate HEAD..@{upstream}
+
+  # Commits you have locally that are not on upstream yet.
+  # Output looks like:
+  # 1234abc (HEAD -> feature/cache-fix) add retry jitter to webhook client
+  outgoing = log --oneline --decorate @{upstream}..HEAD
+
+  # Recent tags for repos that ship from tags or cut releases regularly.
+  # Output looks like:
+  # v2.14.0
+  tags-recent = tag --sort=-creatordate
+
+  # Follow the history of one hotspot file or directory after `git churn`.
+  # Shows commit history plus per-commit file stats for one path, e.g.:
+  # app/services/billing/reconciler.rb | 42 ++++++++++------
+  hotspot = !f() { git log --stat --follow -- \"$@\"; }; f
+
+  # Blame with readable dates. Add `-L start,end` to focus on a range.
+  # Output looks like:
+  # a1b2c3d4 (Jane Doe 2026-03-18  42) retry_count += 1
+  blame-recent = blame -w --date=short
 
 [color]
   branch = auto
@@ -34,13 +109,22 @@
   untracked = cyan
 [merge]
   tool = vimdiff
-  conflictstyle = diff3
+  conflictstyle = zdiff3
 [github]
 	user = fuentesjr
+[fetch]
+	prune = true
+[pull]
+	ff = only
+[rerere]
+	enabled = true
+[rebase]
+	autosquash = true
+	autostash = true
 [push]
 	default = simple
 	autoSetupRemote = true
 [init]
-	defaultBranch = trunk
+	defaultBranch = main
 [core]
 	excludesFile = ~/.gitignore
