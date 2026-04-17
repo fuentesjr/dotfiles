@@ -21,6 +21,7 @@ alias zshrc="nvim ~/.zshrc"
 alias be="bundle exec"
 alias vimf="nvim \$(fzf)"
 alias showpath='echo "$PATH" | tr ":" "\n"'
+alias ncheat="glow ~/.config/nvim/CHEATSHEET.md"
 
 # Completions (cached, refreshed every 24h)
 autoload -U compinit
@@ -39,5 +40,3 @@ command -v but &>/dev/null && eval "$(but completions zsh)"
 # Tool managers
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 command -v mise &>/dev/null && eval "$(mise activate zsh)"
-
-[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
