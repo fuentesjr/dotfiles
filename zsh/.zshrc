@@ -40,3 +40,6 @@ command -v but &>/dev/null && eval "$(but completions zsh)"
 # Tool managers
 command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
 command -v mise &>/dev/null && eval "$(mise activate zsh)"
+
+# bun completions
+[ -s "/Users/sal/.bun/_bun" ] && source "/Users/sal/.bun/_bun"

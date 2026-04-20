@@ -1,6 +1,6 @@
 [user]
-  name = Salvador Fuentes Jr.
-  email = fuentesjr@gmail.com
+	name = Salvador Fuentes Jr.
+	email = 9240+fuentesjr@users.noreply.github.com
 
 [include]
   path = ~/.gitconfig.local
