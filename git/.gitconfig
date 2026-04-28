@@ -46,7 +46,7 @@
   # Top contributors for a specific file or directory.
   # Output looks like:
   # 38 Jane Doe
-  owners = !f() { git shortlog -sn --all --no-merges -- "$@"; }; f
+  owners = "!f() { git shortlog -sn --all --no-merges -- \"$@\"; }; f"
 
   # Files that recur in repair-shaped commits. Heuristic only; depends on commit messages.
   # Output looks like:
@@ -61,7 +61,7 @@
   # Convenience wrapper: show both repair signals together.
   # Shows two sections:
   # == bug-files ==  /  == firefights ==
-  repairs = !f() { printf '== bug-files ==\n'; git bug-files; printf '\n== firefights ==\n'; git firefights; }; f
+  repairs = "!f() { printf '%s\\n' '== bug-files =='; git bug-files; printf '\\n%s\\n' '== firefights =='; git firefights; }; f"
 
   # Local branch tracking status and upstream divergence.
   # Output looks like:
@@ -86,12 +86,13 @@
   # Follow the history of one hotspot file or directory after `git churn`.
   # Shows commit history plus per-commit file stats for one path, e.g.:
   # app/services/billing/reconciler.rb | 42 ++++++++++------
-  hotspot = !f() { git log --stat --follow -- \"$@\"; }; f
+  hotspot = "!f() { git log --stat --follow -- \"$@\"; }; f"
 
   # Blame with readable dates. Add `-L start,end` to focus on a range.
   # Output looks like:
   # a1b2c3d4 (Jane Doe 2026-03-18  42) retry_count += 1
   blame-recent = blame -w --date=short
+	aliases = config --get-regexp '^alias\\.'
 
 [color]
   branch = auto
