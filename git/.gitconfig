@@ -18,6 +18,9 @@
   dec = log --pretty=oneline --decorate
   sub = submodule
 
+  # Print the review aliases cheatsheet.
+  cheatsheet = !cat "$HOME/Projects/dotfiles/git/GIT_ALIASES_CHEATSHEET.md"
+
   # Review shortcuts: use Git history to decide what to read first.
   # Shows a recent activity stream like:
   # 2026-04-10 a1b2c3d Jane Doe revert flaky cache invalidation
