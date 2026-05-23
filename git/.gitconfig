@@ -19,7 +19,7 @@
   sub = submodule
 
   # Print the review aliases cheatsheet.
-  cheatsheet = !cat "$HOME/Projects/dotfiles/git/GIT_ALIASES_CHEATSHEET.md"
+  cheatsheet = !bat --language markdown --style plain "$HOME/Projects/dotfiles/git/GIT_ALIASES_CHEATSHEET.md"
 
   # Review shortcuts: use Git history to decide what to read first.
   # Shows a recent activity stream like:
