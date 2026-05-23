@@ -142,8 +142,50 @@ return {
   {
     "toppair/peek.nvim",
     ft = "markdown",
-    build = "deno task --quiet build:fast",
+    build = function(plugin)
+      local deno = vim.fn.exepath("deno")
+      if deno == "" and vim.fn.executable("mise") == 1 then
+        local install_dir
+        for _, line in ipairs(vim.fn.systemlist({ "mise", "where", "deno" })) do
+          if line:match("^/") then
+            install_dir = line
+          end
+        end
+        if vim.v.shell_error == 0 and install_dir and install_dir ~= "" then
+          deno = install_dir .. "/bin/deno"
+        end
+      end
+
+      if deno == "" then
+        vim.notify("peek.nvim build skipped: Deno not found in PATH or via mise", vim.log.levels.WARN)
+        return
+      end
+
+      local result = vim.system({ deno, "task", "--quiet", "build:fast" }, {
+        cwd = plugin.dir,
+        text = true,
+      }):wait()
+
+      if result.code ~= 0 then
+        error(result.stderr ~= "" and result.stderr or ("peek.nvim build failed with exit code " .. result.code))
+      end
+    end,
     config = function()
+      if vim.fn.executable("deno") == 0 and vim.fn.executable("mise") == 1 then
+        local install_dir
+        for _, line in ipairs(vim.fn.systemlist({ "mise", "where", "deno" })) do
+          if line:match("^/") then
+            install_dir = line
+          end
+        end
+        if vim.v.shell_error == 0 and install_dir and install_dir ~= "" then
+          local deno_bin = install_dir .. "/bin"
+          if vim.fn.isdirectory(deno_bin) == 1 then
+            vim.env.PATH = deno_bin .. ":" .. vim.env.PATH
+          end
+        end
+      end
+
       require("peek").setup()
       vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
       vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})

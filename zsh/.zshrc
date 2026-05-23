@@ -22,6 +22,7 @@ alias be="bundle exec"
 alias vimf="nvim \$(fzf)"
 alias showpath='echo "$PATH" | tr ":" "\n"'
 alias ncheat="glow ~/.config/nvim/CHEATSHEET.md"
+alias cpconfig="ssh hermes 'cat .hermes/config.yaml' | pbcopy"
 
 # Completions (cached, refreshed every 24h)
 autoload -U compinit
@@ -43,3 +44,17 @@ command -v mise &>/dev/null && eval "$(mise activate zsh)"
 
 # bun completions
 [ -s "/Users/sal/.bun/_bun" ] && source "/Users/sal/.bun/_bun"
+
+
+# ${UserConfigDir}/zsh/.zshrc
+autoload -U compinit && compinit
+export CARAPACE_BRIDGES='zsh,bash,inshellisense' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
