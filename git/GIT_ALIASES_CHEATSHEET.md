@@ -4,6 +4,31 @@ This file documents the review-oriented aliases in `.gitconfig`.
 
 Use these before reading code when you want to identify hotspots, ownership, repair patterns, and branch state quickly.
 
+## Accessing This Cheatsheet
+
+### `git cheatsheet`
+
+Question answered: what Git aliases are available, and how should I use the review-oriented ones?
+
+How to read it:
+- Prints this Markdown cheatsheet with syntax highlighting via `bat`.
+- Useful when you remember there is a review workflow but not the exact command names.
+
+### `git aliases`
+
+Question answered: what aliases are configured in Git right now?
+
+Example output:
+
+```text
+alias.st status
+alias.cheatsheet !bat --language markdown --style plain ...
+```
+
+How to read it:
+- This is the raw Git configuration view.
+- Use it to verify an alias exists or inspect the exact command behind it.
+
 ## Quick Start
 
 Start with these in order:
@@ -15,6 +40,24 @@ Start with these in order:
 5. `git repairs`
 6. `git hotspot path/to/file_or_dir`
 7. `git blame-recent path/to/file`
+
+## Everyday Shortcuts
+
+These are thin aliases for common Git commands:
+
+| Alias | Expands to |
+| --- | --- |
+| `git st` | `git status` |
+| `git ci` | `git commit` |
+| `git br` | `git branch` |
+| `git co` | `git checkout` |
+| `git df` | `git diff` |
+| `git dfc` | `git diff --cached` |
+| `git lg` | `git log -p` |
+| `git last` | `git log -n 1` |
+| `git graph` | `git log --graph` |
+| `git dec` | `git log --pretty=oneline --decorate` |
+| `git sub` | `git submodule` |
 
 ## Repo Activity
 
@@ -135,6 +178,20 @@ Example output:
 How to read it:
 - Use this on a hotspot path to find likely owners or maintainers.
 - More useful than repo-wide commit counts when you are already looking at one area.
+
+### `git blame-recent path/to/file`
+
+Question answered: who last changed each line, with readable dates?
+
+Example output:
+
+```text
+a1b2c3d4 (Jane Doe 2026-03-18  42) retry_count += 1
+```
+
+How to read it:
+- Add `-L start,end` before the file path to focus on a range.
+- Uses whitespace-insensitive blame, so formatting-only changes are less distracting.
 
 ## Repair Signals
 
