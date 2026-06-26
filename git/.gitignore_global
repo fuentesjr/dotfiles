@@ -1,6 +1,4 @@
 *.swp
 notes/
-sorbet/
-vendor/
 .DS_Store
 .claude/

@@ -1,9 +1,6 @@
 [user]
-	name = Salvador Fuentes Jr.
-	email = 9240+fuentesjr@users.noreply.github.com
-
-[include]
-  path = ~/.gitconfig.local
+  name = Salvador Fuentes Jr.
+  email = 9240+fuentesjr@users.noreply.github.com
 
 [alias]
   st = status
@@ -12,6 +9,9 @@
   co = checkout
   df = diff
   dfc = diff --cached
+  # hdiff/hshow render the diff in the hunk TUI (github.com/modem-dev/hunk)
+  hdiff = -c core.pager=\"hunk pager\" diff
+  hshow = -c core.pager=\"hunk pager\" show
   lg = log -p
   last = log -n 1
   graph = log --graph
@@ -34,7 +34,7 @@
   # Same idea as `git churn`, but grouped by directory for larger repos.
   # Output looks like:
   # 402 app/services/billing
-  churn-dirs = !git log --format=format: --name-only --since='1 year ago' | sed '/^$/d' | xargs -n1 dirname | sort | uniq -c | sort -nr | head -20
+  churn-dirs = !git log --format=format: --name-only --since='1 year ago' | sed '/^$/d' | sed 's,/[^/]*$,,' | sort | uniq -c | sort -nr | head -20
 
   # Contributors active in the last 6 months. Good for current ownership hints.
   # Output looks like:
@@ -95,7 +95,7 @@
   # Output looks like:
   # a1b2c3d4 (Jane Doe 2026-03-18  42) retry_count += 1
   blame-recent = blame -w --date=short
-	aliases = config --get-regexp '^alias\\.'
+  aliases = config --get-regexp '^alias\\.'
 
 [color]
   branch = auto
@@ -115,20 +115,38 @@
   tool = vimdiff
   conflictstyle = zdiff3
 [github]
-	user = fuentesjr
+  user = fuentesjr
 [fetch]
-	prune = true
+  prune = true
 [pull]
-	ff = only
+  ff = only
 [rerere]
-	enabled = true
+  enabled = true
+  autoUpdate = true
 [rebase]
-	autosquash = true
-	autostash = true
+  autosquash = true
+  autostash = true
+  # Keep dependent branch tips in sync when rebasing a stack.
+  updateRefs = true
 [push]
-	default = simple
-	autoSetupRemote = true
+  default = simple
+  autoSetupRemote = true
 [init]
-	defaultBranch = main
+  defaultBranch = main
 [core]
-	excludesFile = ~/.gitignore
+  excludesFile = ~/.gitignore
+  # Faster status/diff on large repos (builtin FS monitor on macOS).
+  fsmonitor = true
+  untrackedCache = true
+[diff]
+  algorithm = histogram
+  # Distinguish moved code from real additions/deletions in diffs.
+  colorMoved = zebra
+[branch]
+  sort = -committerdate
+[commit]
+  verbose = true
+
+# Machine-local / private overrides — kept last so they always win.
+[include]
+  path = ~/.gitconfig.local
