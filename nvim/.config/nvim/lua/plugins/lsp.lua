@@ -54,7 +54,13 @@ return {
         },
       }))
 
-      vim.lsp.config("solargraph", shared)
+      vim.lsp.config("solargraph", vim.tbl_deep_extend("force", shared, {
+        settings = {
+          solargraph = {
+            diagnostics = false,
+          },
+        },
+      }))
 
       vim.lsp.config("lua_ls", vim.tbl_extend("force", shared, {
         settings = {
