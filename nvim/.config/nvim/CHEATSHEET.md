@@ -179,9 +179,11 @@ DAP UI opens/closes automatically when a debug session starts/ends.
 
 | Key | Action |
 |-----|--------|
-| `Space xx` | Toggle diagnostics |
+| `Space xx` | Toggle diagnostics list |
+| `Space xi` | Toggle inline diagnostics |
+| `Space xb` | Toggle current-buffer diagnostics |
 | `Space xw` | Workspace diagnostics |
-| `Space xd` | Buffer diagnostics |
+| `Space xd` | Buffer diagnostics list |
 | `Space xq` | Quickfix list |
 | `Space xl` | Location list |
 

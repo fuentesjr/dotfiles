@@ -31,3 +31,21 @@ keymap("n", "<leader>vx", function()
   vim.cmd("resize")
 end, vim.tbl_extend("force", opts, { desc = "Reload config + resize" }))
 keymap("n", "<leader>vz", ":vsp ~/.config/zellij/config.kdl<cr>", vim.tbl_extend("force", opts, { desc = "Open Zellij config" }))
+
+-- Diagnostics
+keymap("n", "<leader>xi", function()
+  local inline_enabled = vim.diagnostic.config().virtual_text ~= false
+
+  vim.diagnostic.config({
+    virtual_text = inline_enabled and false or { prefix = "●" },
+  })
+
+  vim.notify("Inline diagnostics " .. (inline_enabled and "off" or "on"))
+end, vim.tbl_extend("force", opts, { desc = "Toggle inline diagnostics" }))
+
+keymap("n", "<leader>xb", function()
+  local enabled = vim.diagnostic.is_enabled({ bufnr = 0 })
+
+  vim.diagnostic.enable(not enabled, { bufnr = 0 })
+  vim.notify("Buffer diagnostics " .. (enabled and "off" or "on"))
+end, vim.tbl_extend("force", opts, { desc = "Toggle buffer diagnostics" }))
