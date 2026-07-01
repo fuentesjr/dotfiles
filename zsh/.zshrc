@@ -15,8 +15,14 @@ if type rg &> /dev/null; then
 fi
 
 # Personal aliases
-alias ls="eza --group-directories-first --icons=always --color=always"
-alias ll="ls -al"
+alias ls='eza --icons=always --color=always --group-directories-first'
+alias l='eza -l --icons=always --color=always --group-directories-first'
+alias ll='eza -lh --icons=always --color=always --git --group-directories-first'
+alias la='eza -lha --icons=always --color=always --git --group-directories-first'
+alias lt='eza --tree --level=2 --icons=always --color=always'
+alias llm='eza -lh --icons=always --color=always --git --sort=modified'
+
+
 alias zshrc="nvim ~/.zshrc"
 alias be="bundle exec"
 alias vimf="nvim \$(fzf)"
