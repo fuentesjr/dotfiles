@@ -134,7 +134,7 @@
 [init]
   defaultBranch = main
 [core]
-  excludesFile = ~/.gitignore
+  excludesFile = ~/.gitignore_global
   # Faster status/diff on large repos (builtin FS monitor on macOS).
   fsmonitor = true
   untrackedCache = true

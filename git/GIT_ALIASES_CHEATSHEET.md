@@ -53,6 +53,8 @@ These are thin aliases for common Git commands:
 | `git co` | `git checkout` |
 | `git df` | `git diff` |
 | `git dfc` | `git diff --cached` |
+| `git hdiff` | `git diff` rendered in the [hunk](https://github.com/modem-dev/hunk) TUI |
+| `git hshow` | `git show` rendered in the [hunk](https://github.com/modem-dev/hunk) TUI |
 | `git lg` | `git log -p` |
 | `git last` | `git log -n 1` |
 | `git graph` | `git log --graph` |

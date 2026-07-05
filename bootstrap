@@ -17,11 +17,10 @@ backup "$HOME/.bashrc"
 backup "$HOME/.zshrc"
 
 echo "Installing packages..."
-brew install fzf figlet ripgrep fd-find stow neovim
+brew install fzf figlet ripgrep fd-find stow neovim bat modem-dev/tap/hunk
 
 echo "Installing ctags..."
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-script/build-ctags > /dev/null 2>&1
 
 echo "Stowing dotfiles..."
 stow --target="$HOME" zsh git vim nvim jj tmux
