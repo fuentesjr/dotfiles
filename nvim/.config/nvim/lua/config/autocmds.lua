@@ -87,3 +87,66 @@ autocmd("TextYankPost", {
     vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
   end,
 })
+
+-- Copy completed visual selections to the system clipboard. `clipboard=unnamedplus`
+-- already makes yanks use the OS clipboard; this handles the extra "select text
+-- and it is copied" workflow, including mouse selections.
+local function visual_selection_type(mode)
+  if mode == "v" or mode == "V" or mode == "\022" then
+    return mode
+  end
+end
+
+local function copy_visual_selection_to_clipboard()
+  local mode = vim.fn.mode()
+  local selection_type
+  local start_pos
+  local end_pos
+
+  if visual_selection_type(mode) then
+    selection_type = mode
+    start_pos = vim.fn.getpos("v")
+    end_pos = vim.fn.getpos(".")
+  else
+    selection_type = vim.fn.visualmode()
+    if not visual_selection_type(selection_type) then
+      return
+    end
+
+    start_pos = vim.fn.getpos("'<")
+    end_pos = vim.fn.getpos("'>")
+  end
+
+  if start_pos[2] == 0 or end_pos[2] == 0 then
+    return
+  end
+
+  local ok, lines = pcall(vim.fn.getregion, start_pos, end_pos, { type = selection_type })
+  if not ok or #lines == 0 then
+    return
+  end
+
+  pcall(vim.fn.setreg, "+", lines, selection_type)
+end
+
+local AutoCopyVisualSelection = augroup("AutoCopyVisualSelection", { clear = true })
+autocmd("ModeChanged", {
+  group = AutoCopyVisualSelection,
+  pattern = "[vV\022]*:*",
+  callback = function()
+    if visual_selection_type(vim.v.event.new_mode:sub(1, 1)) then
+      return
+    end
+
+    copy_visual_selection_to_clipboard()
+  end,
+})
+
+vim.keymap.set("x", "<LeftRelease>", function()
+  vim.schedule(copy_visual_selection_to_clipboard)
+  return vim.api.nvim_replace_termcodes("<LeftRelease>", true, false, true)
+end, {
+  expr = true,
+  silent = true,
+  desc = "Copy visual selection to system clipboard",
+})
