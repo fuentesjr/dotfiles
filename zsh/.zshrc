@@ -64,3 +64,14 @@ export PATH="$HOME/.grok/bin:$PATH"
 fpath=(~/.grok/completions/zsh $fpath)
 autoload -Uz compinit && compinit -C
 # <<< grok installer <<<
+
+# Entire CLI shell completion
+autoload -Uz compinit && compinit && source <(entire completion zsh)
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/sal/.local/bin:$PATH"
