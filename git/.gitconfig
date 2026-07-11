@@ -136,7 +136,7 @@
 [core]
   excludesFile = ~/.gitignore_global
   # Faster status/diff on large repos (builtin FS monitor on macOS).
-  fsmonitor = true
+	fsmonitor = false
   untrackedCache = true
 [diff]
   algorithm = histogram
