@@ -191,4 +191,45 @@ return {
       vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
     end,
   },
+
+  -- CSV/TSV tabular view
+  -- Tab/S-Tab stay as buffer navigation; field motions use ]f/[f and ]r/[r instead.
+  {
+    "hat0uma/csvview.nvim",
+    ft = { "csv", "tsv" },
+    cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle", "CsvViewInfo" },
+    keys = {
+      { "<leader>cv", "<cmd>CsvViewToggle<cr>", desc = "Toggle CSV view" },
+    },
+    opts = {
+      parser = { comments = { "#", "//" } },
+      keymaps = {
+        textobject_field_inner = { "if", mode = { "o", "x" } },
+        textobject_field_outer = { "af", mode = { "o", "x" } },
+        jump_next_field_end = { "]f", mode = { "n", "v" } },
+        jump_prev_field_end = { "[f", mode = { "n", "v" } },
+        jump_next_row = { "]r", mode = { "n", "v" } },
+        jump_prev_row = { "[r", mode = { "n", "v" } },
+      },
+    },
+    config = function(_, opts)
+      local csvview = require("csvview")
+      csvview.setup(opts)
+
+      local function enable_csv_buf(bufnr)
+        local ft = vim.bo[bufnr].filetype
+        if ft == "csv" or ft == "tsv" then
+          csvview.enable(bufnr)
+        end
+      end
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = { "csv", "tsv" },
+        callback = function(ev)
+          csvview.enable(ev.buf)
+        end,
+      })
+      enable_csv_buf(vim.api.nvim_get_current_buf())
+    end,
+  },
 }

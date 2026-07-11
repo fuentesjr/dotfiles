@@ -26,7 +26,7 @@ Leader key: `Space`
 │   │   ├── telescope.lua     # Telescope v0.2.2 + fzf-native
 │   │   ├── treesitter.lua    # Treesitter + textobjects + endwise
 │   │   ├── ui.lua            # dracula, lualine, alpha-nvim, tiny-glimmer
-│   │   ├── utilities.lua     # which-key, surround, comment, vim-test, vimux, hardtime, FTerm, zk
+│   │   ├── utilities.lua     # which-key, surround, comment, vim-test, vimux, hardtime, FTerm, zk, csvview
 │   │   └── lang/
 │   │       ├── go.lua        # go.nvim
 │   │       └── ruby.lua      # vim-ruby, vim-rails, rbs, textobj-rubyblock
@@ -209,6 +209,19 @@ Requires [zk](https://github.com/mickael-menu/zk) CLI installed.
 | `Space vz` | Open Zellij config |
 | `Space vp` | Vimux: prompt command |
 
+## CSV / TSV (`csvview.nvim`)
+
+Opening a `csv` or `tsv` buffer enables tabular view automatically. `Space cv` toggles it. Field maps are buffer-local while the view is on; `Tab` / `Shift+Tab` still switch buffers.
+
+| Key | Action |
+|-----|--------|
+| `Space cv` | Toggle CSV view |
+| `]f` / `[f` | Next / previous field |
+| `]r` / `[r` | Next / previous row |
+| `if` / `af` | Inside / around field (operator and visual) |
+
+`:CsvViewEnable`, `:CsvViewDisable`, `:CsvViewToggle`, `:CsvViewInfo`. Pass options to enable or toggle, for example `:CsvViewEnable display_mode=border`.
+
 ## Navigation
 
 | Key | Action |
@@ -324,6 +337,7 @@ Yank and paste use `tiny-glimmer.nvim` animations by default:
 | better-vim-tmux-resizer | Tmux resize | VeryLazy |
 | m4xshen/hardtime.nvim | Habit break | VeryLazy |
 | mickael-menu/zk-nvim | Notes | keys |
+| hat0uma/csvview.nvim | CSV/TSV view | ft/cmd/keys |
 | numToStr/FTerm.nvim | Terminal | keys |
 | ray-x/go.nvim | Go | ft |
 | vim-ruby/vim-ruby | Ruby | ft |
