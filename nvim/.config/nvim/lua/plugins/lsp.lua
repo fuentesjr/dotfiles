@@ -67,8 +67,11 @@ return {
           )
         end,
         -- Skip loose files: ruby-lsp would write a .ruby-lsp folder next to them and index that folder.
-        root_markers = { "Gemfile", ".git", ".jj" },
-        workspace_required = true,
+        -- Skip untrusted projects too: ruby-lsp evaluates the project's Gemfile.
+        root_dir = function(bufnr, on_dir)
+          local root = vim.fs.root(bufnr, { "Gemfile", ".git", ".jj" })
+          if root and require("utils").project_trusted(root) then on_dir(root) end
+        end,
       }))
 
       vim.lsp.config("lua_ls", vim.tbl_extend("force", shared, {
@@ -85,7 +88,19 @@ return {
         },
       }))
 
-      vim.lsp.config("ts_ls", shared)
+      -- ts_ls runs the root's node_modules server and loads the workspace TypeScript, so
+      -- start it only when the file's project and the root lspconfig picks are both trusted.
+      -- They differ when lspconfig finds no lock file or .git and falls back to Neovim's cwd.
+      local ts_root_dir = vim.lsp.config.ts_ls.root_dir
+      vim.lsp.config("ts_ls", vim.tbl_extend("force", shared, {
+        root_dir = function(bufnr, on_dir)
+          local utils = require("utils")
+          if not utils.project_trusted(vim.api.nvim_buf_get_name(bufnr)) then return end
+          ts_root_dir(bufnr, function(root)
+            if utils.project_trusted(root) then on_dir(root) end
+          end)
+        end,
+      }))
 
       vim.lsp.enable({ "gopls", "ruby_lsp", "lua_ls", "ts_ls" })
 

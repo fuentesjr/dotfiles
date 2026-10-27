@@ -20,6 +20,13 @@ return {
         markdown = { "prettier" },
         python = { "black" },
       },
+      formatters = {
+        -- prettier loads the project's config and plugins, which are code. conform checks
+        -- the condition only after finding prettier, so a machine without it never asks.
+        prettier = {
+          condition = function(_, ctx) return require("utils").project_trusted(ctx.filename) end,
+        },
+      },
       format_on_save = function(bufnr)
         -- Only auto-format filetypes that have a formatter configured. Ruby has none here
         -- because ruby-lsp formats it with the project's RuboCop or Syntax Tree.
@@ -92,11 +99,14 @@ return {
           local before = dirs()
 
           -- Skip linters that aren't installed, as format on save does for formatters.
+          -- eslint loads the project's config, which is code, even when it comes from PATH.
+          -- Check executable first so a machine without eslint never sees the trust prompt.
           lint.try_lint(nil, {
             cwd = root,
             filter = function(linter)
               local cmd = type(linter.cmd) == "function" and linter.cmd() or linter.cmd
-              return vim.fn.executable(cmd) == 1
+              if vim.fn.executable(cmd) ~= 1 then return false end
+              return linter.name ~= "eslint" or require("utils").project_trusted(vim.api.nvim_buf_get_name(0))
             end,
           })
 

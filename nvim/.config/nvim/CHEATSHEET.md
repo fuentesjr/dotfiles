@@ -48,6 +48,7 @@ For leader keymaps, press `Space` and wait for which-key. This sheet covers the 
   - Syntax Tree formats instead when `syntax_tree` is listed and no gem starting with `rubocop` is.
   - Otherwise Ruby files are not formatted or linted.
 - **Linting** runs the filetype's linters from the table below on open, on save, and on leaving insert mode. A new file is linted after its first save. Linters run from the nearest folder with a package.json, go.mod, pyproject.toml, .git, or .jj, otherwise from Neovim's current directory. eslint is the nearest `node_modules/.bin/eslint` above the file, else the one on PATH. Go files in a module lint their whole package. Linters that aren't installed are skipped without a message.
+- **Project trust**: eslint, prettier, ts_ls, and ruby-lsp run code from the project, so they run only in a project you trust. A project is the nearest folder above the file with .git or .jj, else the nearest with package.json or Gemfile; with none of these, nothing is asked. ts_ls also checks the folder it starts in, which is Neovim's current directory when no lock file or .git is above the file. The first time a file in a project needs one of these tools, Neovim shows its own trust prompt ("exrc: Found untrusted code"). Allow and deny are saved in `~/.local/state/nvim/trust`; to be asked again, run `:trust ++remove <project folder>`, then restart Neovim or reload the config. Ignore, view, and Esc last until you quit Neovim or reload the config.
 - **Trailing whitespace** is trimmed on save, except in markdown, gitcommit, diff, and text buffers.
 - **Config reload**: saving a Lua file in the config directory re-runs options, keymaps, and autocmds. Restart Neovim to apply plugin changes.
 - **Files changed outside Neovim** reload when Neovim gains focus or you enter the buffer.
@@ -80,6 +81,6 @@ For leader keymaps, press `Space` and wait for which-key. This sheet covers the 
 ## External Tools
 
 - `Space z` notes need the [zk](https://github.com/mickael-menu/zk) CLI.
-- Ruby needs the `ruby-lsp` gem in each project's Ruby (`gem install ruby-lsp`). Neovim starts it with `mise x -- ruby-lsp`, not through Mason. ruby-lsp starts only for files with a Gemfile, .git, or .jj above them.
+- Ruby needs the `ruby-lsp` gem in each project's Ruby (`gem install ruby-lsp`). Neovim starts it with `mise x -- ruby-lsp`, not through Mason. ruby-lsp starts only for files with a Gemfile, .git, or .jj above them, in a trusted project.
 - Go debugging needs delve (`dlv`); Ruby debugging needs `rdbg`. The DAP UI opens and closes with the debug session.
 - This config doesn't install the formatters and linters in the table; install the ones you use.
