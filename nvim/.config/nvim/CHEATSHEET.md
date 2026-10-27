@@ -50,7 +50,7 @@ For leader keymaps, press `Space` and wait for which-key. This sheet covers the 
   - RuboCop formats and lints when a gem whose name starts with `rubocop` is listed, or when RuboCop comes in through another gem and the project has a `.rubocop.yml`.
   - Syntax Tree formats instead when `syntax_tree` is listed and no gem starting with `rubocop` is.
   - Otherwise Ruby files are not formatted or linted.
-- **Linting** runs the filetype's linter on open, on save, and on leaving insert mode.
+- **Linting** runs the filetype's linters from the table below on open, on save, and on leaving insert mode. Linters that aren't installed are skipped without a message.
 - **Trailing whitespace** is trimmed on save, except in markdown, gitcommit, diff, and text buffers.
 - **Config reload**: saving a Lua file in the config directory re-runs options, keymaps, and autocmds. Restart Neovim to apply plugin changes.
 - **Files changed outside Neovim** reload when Neovim gains focus or you enter the buffer.

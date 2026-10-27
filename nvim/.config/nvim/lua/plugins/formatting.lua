@@ -47,7 +47,14 @@ return {
       vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
         group = vim.api.nvim_create_augroup("NvimLint", { clear = true }),
         callback = function()
-          lint.try_lint()
+          -- Skip linters that aren't installed, as format on save does for formatters.
+          -- eslint's cmd is a function that prefers the project's node_modules copy.
+          lint.try_lint(nil, {
+            filter = function(linter)
+              local cmd = type(linter.cmd) == "function" and linter.cmd() or linter.cmd
+              return vim.fn.executable(cmd) == 1
+            end,
+          })
         end,
       })
     end,
