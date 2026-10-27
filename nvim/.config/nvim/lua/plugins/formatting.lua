@@ -44,17 +44,63 @@ return {
         python = { "ruff" },
       }
 
+      -- The stock cmd only checks ./node_modules, which misses an eslint hoisted to a
+      -- monorepo root. Search upward from the file instead.
+      lint.linters.eslint.cmd = function()
+        for dir in vim.fs.parents(vim.api.nvim_buf_get_name(0)) do
+          local bin = dir .. "/node_modules/.bin/eslint"
+          if vim.uv.fs_stat(bin) then return bin end
+        end
+        return "eslint"
+      end
+
+      -- golangci-lint decides between linting the file and its package once, from Neovim's
+      -- startup cwd, so a file outside that module misses symbols from sibling files.
+      -- Decide per buffer instead. Patched on first use because loading the linter
+      -- spawns golangci-lint and go; args is nil when golangci-lint isn't installed.
+      lint.linters.golangcilint = function()
+        local linter = require("lint.linters.golangcilint")
+        local args = linter.args
+        if args and type(args[#args]) == "function" then
+          args[#args] = function()
+            local file = vim.api.nvim_buf_get_name(0)
+            return vim.fs.root(file, "go.mod") and vim.fs.dirname(file) or file
+          end
+        end
+        return linter
+      end
+
       vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
         group = vim.api.nvim_create_augroup("NvimLint", { clear = true }),
         callback = function()
+          -- Run linters from the file's project root, not Neovim's cwd, so eslint finds the
+          -- project's config and golangci-lint runs inside the file's module.
+          -- The nested list gives the markers equal priority: the nearest one wins.
+          local root = vim.fs.root(0, { { "package.json", "go.mod", "pyproject.toml", ".git", ".jj" } })
+
+          -- nvim-lint evaluates linter args with a temporary :cd to root, which drops this
+          -- window's :lcd and the tab's :tcd. Put all three levels back afterwards.
+          local function dirs()
+            return { vim.fn.getcwd(-1, -1), vim.fn.haslocaldir(-1, 0), vim.fn.getcwd(-1, 0),
+              vim.fn.haslocaldir(0), vim.fn.getcwd(0) }
+          end
+          local before = dirs()
+
           -- Skip linters that aren't installed, as format on save does for formatters.
-          -- eslint's cmd is a function that prefers the project's node_modules copy.
           lint.try_lint(nil, {
+            cwd = root,
             filter = function(linter)
               local cmd = type(linter.cmd) == "function" and linter.cmd() or linter.cmd
               return vim.fn.executable(cmd) == 1
             end,
           })
+
+          if not vim.deep_equal(before, dirs()) then
+            local mods = { noautocmd = true }
+            vim.cmd.cd({ before[1], mods = mods })
+            if before[2] == 1 then vim.cmd.tcd({ before[3], mods = mods }) end
+            if before[4] == 1 then vim.cmd.lcd({ before[5], mods = mods }) end
+          end
         end,
       })
     end,
