@@ -33,7 +33,9 @@ return {
 
   {
     "mfussenegger/nvim-lint",
-    event = { "BufReadPost", "BufNewFile", "BufWritePost" },
+    -- Load at startup, not on a buffer event. Lazy-loading on BufReadPost races filetype
+    -- detection: the first file's FileType event fires before the lint autocmd exists.
+    lazy = false,
     config = function()
       local lint = require("lint")
 
@@ -70,9 +72,12 @@ return {
         return linter
       end
 
-      vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+      vim.api.nvim_create_autocmd({ "BufWritePost", "FileType", "InsertLeave" }, {
         group = vim.api.nvim_create_augroup("NvimLint", { clear = true }),
         callback = function()
+          -- Skip buffers not yet saved: golangci-lint exits with an error on a path that doesn't exist.
+          if not vim.uv.fs_stat(vim.api.nvim_buf_get_name(0)) then return end
+
           -- Run linters from the file's project root, not Neovim's cwd, so eslint finds the
           -- project's config and golangci-lint runs inside the file's module.
           -- The nested list gives the markers equal priority: the nearest one wins.
