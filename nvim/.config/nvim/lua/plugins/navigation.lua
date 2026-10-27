@@ -73,7 +73,8 @@ return {
   {
     "bkad/CamelCaseMotion",
     event = "VeryLazy",
-    config = function()
+    -- The plugin reads this when it is sourced, so it must be set in init, not config.
+    init = function()
       vim.g.camelcasemotion_key = "<leader>"
     end,
   },

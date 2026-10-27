@@ -39,7 +39,6 @@ autocmd("BufWritePost", {
     local config_root = vim.fn.stdpath("config")
 
     if current_file:sub(1, #config_root) == config_root then
-      -- Re-run the full Lua bootstrap instead of :source so require()'d modules refresh too.
       require("utils").reload_config()
     end
   end,

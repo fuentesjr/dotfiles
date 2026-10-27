@@ -79,16 +79,11 @@ return {
   {
     "RyanMillerC/better-vim-tmux-resizer",
     event = "VeryLazy",
-    config = function()
+    -- The plugin reads these when it is sourced, so they must be set in init, not config.
+    -- Its default <M-h/j/k/l> maps match the keys its tmux side sends.
+    init = function()
       vim.g.tmux_resizer_resize_count = 3
       vim.g.tmux_resizer_vertical_resize_count = 3
-      vim.g.tmux_resizer_no_mappings = 1
-
-      -- Set up keymaps
-      vim.keymap.set("n", "<Esc>h", ":TmuxResizeLeft<cr>", { silent = true })
-      vim.keymap.set("n", "<Esc>j", ":TmuxResizeDown<cr>", { silent = true })
-      vim.keymap.set("n", "<Esc>k", ":TmuxResizeUp<cr>", { silent = true })
-      vim.keymap.set("n", "<Esc>l", ":TmuxResizeRight<cr>", { silent = true })
     end,
   },
 

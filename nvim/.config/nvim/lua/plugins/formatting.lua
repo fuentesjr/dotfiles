@@ -5,7 +5,7 @@ return {
     event = "BufWritePre",
     cmd = "ConformInfo",
     keys = {
-      { "<leader>lf", function() require("conform").format({ async = true, lsp_fallback = true }) end, desc = "Format" },
+      { "<leader>lf", function() require("conform").format({ async = true, lsp_format = "fallback" }) end, desc = "Format" },
     },
     opts = {
       formatters_by_ft = {
@@ -23,15 +23,10 @@ return {
       },
       format_on_save = function(bufnr)
         -- Only auto-format filetypes that have a formatter configured
-        local ft = vim.bo[bufnr].filetype
         local formatters = require("conform").list_formatters(bufnr)
         if #formatters == 0 then return end
 
-        -- Disable auto-format for filetypes where it may be disruptive
-        local slow_format_filetypes = {}
-        if slow_format_filetypes[ft] then return end
-
-        return { timeout_ms = 2000, lsp_fallback = true }
+        return { timeout_ms = 2000, lsp_format = "fallback" }
       end,
     },
   },

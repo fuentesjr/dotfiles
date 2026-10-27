@@ -6,23 +6,6 @@ require("lazy").setup("plugins", {
     lazy = true, -- should plugins be lazy-loaded?
     version = false, -- always use the latest git commit
   },
-  ui = {
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = "⌘",
-      config = "🛠",
-      event = "📅",
-      ft = "📂",
-      init = "⚙",
-      keys = "🗝",
-      plugin = "🔌",
-      runtime = "💻",
-      require = "🌙",
-      source = "📄",
-      start = "🚀",
-      task = "📌",
-      lazy = "💤",
-    },
-  },
   install = {
     missing = true,
     colorscheme = { "dracula", "habamax" },

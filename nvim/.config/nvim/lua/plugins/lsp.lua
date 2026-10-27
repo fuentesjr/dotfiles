@@ -15,13 +15,14 @@ return {
       local on_attach = function(client, bufnr)
         local opts = { noremap = true, silent = true, buffer = bufnr }
 
+        -- Neovim's defaults already map grr, gri, gra, grn and grt; mapping gr or gi here
+        -- would delay those and shadow built-in gi. K is mapped here because Neovim skips its
+        -- hover K when a filetype plugin sets keywordprg, as vim-ruby does (ri).
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
         vim.keymap.set("n", "<leader>lk", vim.lsp.buf.signature_help, opts)
         vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
         vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
-        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
 
         if client and client.server_capabilities and client.server_capabilities.documentHighlightProvider then
           vim.api.nvim_create_augroup("lsp_document_highlight", { clear = false })
@@ -127,7 +128,6 @@ return {
           "lua_ls",
           "ts_ls",
         },
-        automatic_installation = true,
       })
     end,
   },
@@ -140,7 +140,6 @@ return {
     cmd = "Trouble",
     keys = {
       { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics: Toggle" },
-      { "<leader>xw", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics: Workspace" },
       { "<leader>xd", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Diagnostics: Buffer" },
       { "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "Diagnostics: Quickfix List" },
       { "<leader>xl", "<cmd>Trouble loclist toggle<cr>", desc = "Diagnostics: Location List" },

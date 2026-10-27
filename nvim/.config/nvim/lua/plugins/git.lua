@@ -40,7 +40,8 @@ return {
   -- Git commands
   {
     "tpope/vim-fugitive",
-    cmd = { "Git", "Gstatus", "Gblame", "Gpush", "Gpull" },
+    -- Load at startup so :G and fugitive:// buffers work; a cmd list can't cover them.
+    lazy = false,
   },
 
   -- GitHub integration
