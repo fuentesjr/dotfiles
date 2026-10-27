@@ -87,9 +87,10 @@ autocmd("TextYankPost", {
   end,
 })
 
--- Copy completed visual selections to the system clipboard. `clipboard=unnamedplus`
--- already makes yanks use the OS clipboard; this handles the extra "select text
--- and it is copied" workflow, including mouse selections.
+-- Copy mouse selections to the system clipboard. `clipboard=unnamedplus` already
+-- makes yanks use the OS clipboard; this handles the "select with the mouse and it
+-- is copied" workflow. Keyboard selections are left alone so the clipboard only
+-- changes on an explicit yank.
 local function visual_selection_type(mode)
   if mode == "v" or mode == "V" or mode == "\022" then
     return mode
@@ -127,19 +128,6 @@ local function copy_visual_selection_to_clipboard()
 
   pcall(vim.fn.setreg, "+", lines, selection_type)
 end
-
-local AutoCopyVisualSelection = augroup("AutoCopyVisualSelection", { clear = true })
-autocmd("ModeChanged", {
-  group = AutoCopyVisualSelection,
-  pattern = "[vV\022]*:*",
-  callback = function()
-    if visual_selection_type(vim.v.event.new_mode:sub(1, 1)) then
-      return
-    end
-
-    copy_visual_selection_to_clipboard()
-  end,
-})
 
 vim.keymap.set("x", "<LeftRelease>", function()
   vim.schedule(copy_visual_selection_to_clipboard)
