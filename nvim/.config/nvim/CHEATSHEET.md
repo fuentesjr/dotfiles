@@ -39,9 +39,6 @@ For leader keymaps, press `Space` and wait for which-key. This sheet covers the 
 | `Ctrl+Space` | Open completion |
 | `Ctrl+e` | Close completion |
 | `Ctrl+b`, `Ctrl+f` | Scroll completion docs |
-| `Ctrl+j` | Accept Copilot suggestion |
-| `Alt+]`, `Alt+[` | Next, previous Copilot suggestion |
-| `Alt+k` | Open the Copilot panel |
 
 ## Automatic Behavior
 
@@ -56,7 +53,6 @@ For leader keymaps, press `Space` and wait for which-key. This sheet covers the 
 - **Files changed outside Neovim** reload when Neovim gains focus or you enter the buffer.
 - **Relative numbers** turn off in insert mode and in unfocused windows.
 - **Mouse selections** are copied to the system clipboard. Keyboard selections reach the clipboard only when you yank.
-- **Copilot** is off in env buffers and in key, certificate, and credential files, including buffers renamed to one of those names; `Alt+\` and `Alt+k` do nothing there. A typed command such as `:Copilot panel` still sends the buffer to Copilot. The file patterns are in `lua/plugins/ai.lua`.
 - **endwise** inserts the closing keyword (`end`, `endif`, `fi`, `done`, and so on) in Ruby, Lua, Vimscript, and Bash.
 - **CSV and TSV** buffers open in csvview's table view; `Space cv` toggles it. While the view is on, `]f` and `[f` jump between fields, `]r` and `[r` jump between rows, and `if` and `af` select a field.
 
@@ -78,7 +74,6 @@ For leader keymaps, press `Space` and wait for which-key. This sheet covers the 
 | `:Mason` | Install and update LSP servers |
 | `:ConformInfo` | Formatters for the current buffer |
 | `:checkhealth vim.lsp` | LSP clients attached to the buffer |
-| `:Copilot status` | Whether Copilot is on for the buffer, and why |
 | `:CsvViewEnable display_mode=border` | Table view with options; also `:CsvViewDisable`, `:CsvViewInfo` |
 | `:TinyGlimmer enable`, `:TinyGlimmer disable` | Turn yank and paste animations on or off |
 

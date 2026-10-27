@@ -21,5 +21,4 @@ return {
   { import = "plugins.navigation" },
   { import = "plugins.debug" },
   { import = "plugins.utilities" },
-  { import = "plugins.ai" },
 }
