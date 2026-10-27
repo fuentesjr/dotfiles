@@ -55,12 +55,20 @@ return {
         },
       }))
 
-      vim.lsp.config("solargraph", vim.tbl_deep_extend("force", shared, {
-        settings = {
-          solargraph = {
-            diagnostics = false,
-          },
-        },
+      -- Run ruby-lsp through mise so it uses each project's own Ruby. Its docs warn against
+      -- Mason, whose shared gem directory breaks gems with C extensions. It picks RuboCop or
+      -- Syntax Tree from the project's Gemfile and gemspec; CHEATSHEET.md has the rules.
+      vim.lsp.config("ruby_lsp", vim.tbl_extend("force", shared, {
+        cmd = function(dispatchers, config)
+          return vim.lsp.rpc.start(
+            { "mise", "x", "--", "ruby-lsp" },
+            dispatchers,
+            config and config.root_dir and { cwd = config.cmd_cwd or config.root_dir }
+          )
+        end,
+        -- Skip loose files: ruby-lsp would write a .ruby-lsp folder next to them and index that folder.
+        root_markers = { "Gemfile", ".git", ".jj" },
+        workspace_required = true,
       }))
 
       vim.lsp.config("lua_ls", vim.tbl_extend("force", shared, {
@@ -79,7 +87,7 @@ return {
 
       vim.lsp.config("ts_ls", shared)
 
-      vim.lsp.enable({ "gopls", "solargraph", "lua_ls", "ts_ls" })
+      vim.lsp.enable({ "gopls", "ruby_lsp", "lua_ls", "ts_ls" })
 
       local diagnostic_signs = {
         [vim.diagnostic.severity.ERROR] = " ",
@@ -122,9 +130,10 @@ return {
     dependencies = { "mason.nvim", "nvim-lspconfig" },
     config = function()
       require("mason-lspconfig").setup({
+        -- Start only the servers enabled above, not every server Mason has installed.
+        automatic_enable = false,
         ensure_installed = {
           "gopls",
-          "solargraph",
           "lua_ls",
           "ts_ls",
         },

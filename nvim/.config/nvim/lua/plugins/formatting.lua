@@ -10,7 +10,6 @@ return {
     opts = {
       formatters_by_ft = {
         go = { "gofumpt", "goimports" },
-        ruby = { "rubocop" },
         lua = { "stylua" },
         javascript = { "prettier" },
         typescript = { "prettier" },
@@ -22,9 +21,10 @@ return {
         python = { "black" },
       },
       format_on_save = function(bufnr)
-        -- Only auto-format filetypes that have a formatter configured
+        -- Only auto-format filetypes that have a formatter configured. Ruby has none here
+        -- because ruby-lsp formats it with the project's RuboCop or Syntax Tree.
         local formatters = require("conform").list_formatters(bufnr)
-        if #formatters == 0 then return end
+        if #formatters == 0 and vim.bo[bufnr].filetype ~= "ruby" then return end
 
         return { timeout_ms = 2000, lsp_format = "fallback" }
       end,
@@ -39,7 +39,6 @@ return {
 
       lint.linters_by_ft = {
         go = { "golangcilint" },
-        ruby = { "rubocop" },
         javascript = { "eslint" },
         typescript = { "eslint" },
         python = { "ruff" },

@@ -46,6 +46,10 @@ For leader keymaps, press `Space` and wait for which-key. This sheet covers the 
 ## Automatic Behavior
 
 - **Format on save** runs the filetype's formatters from the table below when at least one is installed. `Space lf` formats on demand and falls back to the LSP. Run `:ConformInfo` to see what is installed for the buffer.
+- **Ruby** formatting and diagnostics come from ruby-lsp, which picks tools from the project's Gemfile and gemspec:
+  - RuboCop formats and lints when a gem whose name starts with `rubocop` is listed, or when RuboCop comes in through another gem and the project has a `.rubocop.yml`.
+  - Syntax Tree formats instead when `syntax_tree` is listed and no gem starting with `rubocop` is.
+  - Otherwise Ruby files are not formatted or linted.
 - **Linting** runs the filetype's linter on open, on save, and on leaving insert mode.
 - **Trailing whitespace** is trimmed on save, except in markdown, gitcommit, diff, and text buffers.
 - **Config reload**: saving a Lua file in the config directory re-runs options, keymaps, and autocmds. Restart Neovim to apply plugin changes.
@@ -59,7 +63,7 @@ For leader keymaps, press `Space` and wait for which-key. This sheet covers the 
 | Filetype | Formatter | Linter |
 |----------|-----------|--------|
 | Go | gofumpt, goimports | golangci-lint |
-| Ruby | rubocop | rubocop |
+| Ruby | ruby-lsp (RuboCop or Syntax Tree) | ruby-lsp (RuboCop) |
 | Lua | stylua | -- |
 | JS, TS | prettier | eslint |
 | Python | black | ruff |
@@ -81,5 +85,6 @@ For leader keymaps, press `Space` and wait for which-key. This sheet covers the 
 ## External Tools
 
 - `Space z` notes need the [zk](https://github.com/mickael-menu/zk) CLI.
+- Ruby needs the `ruby-lsp` gem in each project's Ruby (`gem install ruby-lsp`). Neovim starts it with `mise x -- ruby-lsp`, not through Mason. ruby-lsp starts only for files with a Gemfile, .git, or .jj above them.
 - Go debugging needs delve (`dlv`); Ruby debugging needs `rdbg`. The DAP UI opens and closes with the debug session.
 - This config doesn't install the formatters and linters in the table; install the ones you use.
